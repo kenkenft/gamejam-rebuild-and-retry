@@ -9,6 +9,12 @@ public class Player : MonoBehaviour
     [SerializeField] float playerJump = 5.0f;       // Player's base jump height
     [SerializeField] float jumpVelDecayHigh = 3.0f;       // Player upward velocity decay multiplier for "high" jumps
     [SerializeField] float jumpVelDecayLow = 5.0f;        // Player upward velocity decay multiplier for "lowJumpMultiplier" jumps
+    
+    private BoxCollider2D playerCollider;
+    private float playerColliderWidth;
+    private float playerColliderWidthOffset;
+    private float raycastOffsetVert = -0.5f;
+
     public LayerMask groundLayerMask;
 
     private Rigidbody2D rig;
@@ -21,7 +27,9 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        
+        playerCollider = GetComponent<BoxCollider2D>(); // Get player collider width for use positioning the rays for the IsGrounded function 
+        playerColliderWidth = playerCollider.size[0];
+        playerColliderWidthOffset = playerColliderWidth + 0.1f;
     }
 
     void Update()
@@ -48,32 +56,31 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        // if(IsGrounded())
-            // {
+        if(IsGrounded())
+            {
                 // Add force upwards to rigidbody 
                 rig.AddForce(Vector2.up * playerJump, ForceMode2D.Impulse);
-            // }
+            }
     }
 
-    // bool IsGrounded ()
+    bool IsGrounded ()
+    {
+         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, groundLayerMask);
+        if (hit.collider != null) 
+        {
+            return true;
+        }
+        return false;
+    }//// End of IsGrounded()
+    
+    //  private void OnDrawGizmos()
     // {
-    //     // A raycast will be sent from 4 positions. This way, the player can still jump, even when they're on the edge 
-        
-    //     Ray2D[] rays = new Ray2D[1]
-    //     {
-    //         new Ray2D(transform.position + (Vector3.up * 0.01f), Vector3.down),             // Sends raycast 0.2m from the front of player's feet
-            
-    //     };
+    //     Gizmos.color = Color.red;
+    //     //Draws the raycast projection in Unity
+    //     Gizmos.DrawRay(transform.position + (transform.forward * playerColliderWidthOffset) + (Vector3.up * raycastOffsetVert), Vector3.down);
+    //     Gizmos.DrawRay(transform.position + (-transform.forward * playerColliderWidthOffset) + (Vector3.up * raycastOffsetVert), Vector3.down);
+    //     Gizmos.DrawRay(transform.position + (transform.right * playerColliderWidthOffset) + (Vector3.up * raycastOffsetVert), Vector3.down);
+    //     Gizmos.DrawRay(transform.position + (-transform.right * playerColliderWidthOffset) + (Vector3.up * raycastOffsetVert), Vector3.down);
+    // }//// End of OnDrawGizmos()
 
-    //     // Check whether part of the player is on ground
-    //     for(int i = 0; i < rays.Length; i++)
-    //     {
-    //         if(Physics2D.Raycast(rays[i], 0.1f, groundLayerMask))
-    //         {
-    //             return true;                // Player is on ground
-    //         }
-    //     }
-
-    //     return false;
-    // }
 }
