@@ -5,8 +5,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     
-    [SerializeField] float playerSpeed = 0.05f;
-    [SerializeField] float playerJump = 1.0f;
+    [SerializeField] float playerSpeed = 0.05f;     // Player's base speed
+    [SerializeField] float playerJump = 5.0f;       // Player's base jump height
+    [SerializeField] float jumpVelDecayHigh = 3.0f;       // Player upward velocity decay multiplier for "high" jumps
+    [SerializeField] float jumpVelDecayLow = 5.0f;        // Player upward velocity decay multiplier for "lowJumpMultiplier" jumps
     public LayerMask groundLayerMask;
 
     private Rigidbody2D rig;
@@ -29,9 +31,20 @@ public class Player : MonoBehaviour
         transform.Translate(moveAmount, 0, 0);
         if(Input.GetKeyDown(KeyCode.Space))
             Jump();
-
+        VelocityDecay();                // Decays X, Y, and Z velocities over time
     }
 
+    void VelocityDecay()
+    {
+
+        if(rig.velocity.y < 0)              // Reduces floatiness of jumps
+        {
+            rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayHigh * Time.deltaTime;               // Start increasing downward velocity once peak of jump is reached
+        } else if(rig.velocity.y > 0 && !Input.GetButton("Jump"))
+            {
+                rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayLow * Time.deltaTime;                // Start increasing downward velocity once player lets go of jump input
+            }
+    }//// End of VelocityDecay()
 
     void Jump()
     {
