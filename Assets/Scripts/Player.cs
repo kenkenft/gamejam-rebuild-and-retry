@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     public int damage;
     private bool isAttacking;
 
+    private bool isNearInteractable; 
+
     public LayerMask groundLayerMask;
     public LayerMask enemyLayerMask;
 
@@ -37,6 +39,7 @@ public class Player : MonoBehaviour
         playerColliderWidth = playerCollider.size[0];
         playerColliderWidthOffset = playerColliderWidth + 0.1f;
         isAttacking = false;
+        isNearInteractable = false;
     }
 
     void Update()
@@ -60,9 +63,17 @@ public class Player : MonoBehaviour
             Jump();
         VelocityDecay();                // Decays X, Y, and Z velocities over time
         
-        if(Input.GetKeyDown(KeyCode.E) && !isAttacking)
+        if(Input.GetKeyDown(KeyCode.E))
         {
-            Attack();
+            
+            if(isNearInteractable)
+            {
+                Debug.Log("Attempting to interact");
+            }
+            else if(!isAttacking)
+            {
+                Attack();
+            }
         }
         Debug.DrawRay(transform.position, directionAttack, Color.red);
     }
@@ -118,12 +129,15 @@ public class Player : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         Debug.Log("Trigger Entered");
+        isNearInteractable = true;
         // col.GetComponent<Transform>.name;
     }
 
     void OnTriggerExit2D(Collider2D col)
     {
+        
         Debug.Log("Trigger Exited");
+        isNearInteractable = false;
         // col.GetComponent<Transform>.name;
     }
     
