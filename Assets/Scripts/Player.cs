@@ -45,12 +45,12 @@ public class Player : MonoBehaviour
         faceDirection = Input.GetAxis("Horizontal");
         if(faceDirection < 0f)
         {
-            Debug.Log("I am facing to the Left");
+            // Debug.Log("I am facing to the Left");
             directionAttack =  Vector2.left;        
         }
         else if(faceDirection > 0f)
         {
-            Debug.Log("I am facing to the Right");
+            // Debug.Log("I am facing to the Right");
             directionAttack =  Vector2.right;             
         }
         // Debug.Log(faceDirection);
@@ -114,5 +114,17 @@ public class Player : MonoBehaviour
         }
         return false;
     }//// End of IsGrounded()
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        Debug.Log("Trigger Entered");
+        // col.GetComponent<Transform>.name;
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        Debug.Log("Trigger Exited");
+        // col.GetComponent<Transform>.name;
+    }
     
 }
