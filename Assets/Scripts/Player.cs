@@ -40,6 +40,16 @@ public class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
             Jump();
         VelocityDecay();                // Decays X, Y, and Z velocities over time
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            Attack();
+        }
+    }
+
+    
+    void Attack()
+    {
+        Debug.Log("I am attacking");
     }
 
     void VelocityDecay()
