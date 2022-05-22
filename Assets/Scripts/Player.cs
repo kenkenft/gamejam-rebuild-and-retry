@@ -98,10 +98,19 @@ public class Player : MonoBehaviour
         isAttacking = true;
         // Debug.Log("I am attacking");
         RaycastHit2D hits = Physics2D.Raycast(transform.position, directionAttack, attackRange, enemyLayerMask);
-        if(hits.collider !=null)
+        Collider2D hitsCollider = hits.collider;
+        if(hitsCollider !=null)
         {
             // Debug.Log("Something hit");
-            hits.collider.GetComponent<Enemy>()?.TakeDamage(baseDamage);
+            if(hitsCollider.gameObject.CompareTag("Enemy"))
+            {
+                hitsCollider.GetComponent<Enemy>()?.TakeDamage(baseDamage);
+            }
+            else
+            {
+               // Assumes that there are only enemies and barricades to hit in this game
+                hitsCollider.GetComponent<BreakableBarricade>()?.CheckStrongEnough(baseDamage);
+            }
         }
         isAttacking= false;
     }

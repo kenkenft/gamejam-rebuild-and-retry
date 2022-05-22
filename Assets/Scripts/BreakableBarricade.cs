@@ -13,14 +13,36 @@ public class BreakableBarricade : MonoBehaviour
     {
         tagType = gameObject.tag;
         barricadeTier();            // Initialise barricade properties based on tag. Assumes base damage of player is 4.
-        Debug.Log("barricadeHP: " + barricadeHP);
-        Debug.Log("thresStrength: " + thresStrength);
+        // Debug.Log("barricadeHP: " + barricadeHP);
+        // Debug.Log("thresStrength: " + thresStrength);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void CheckStrongEnough(int damage)
     {
+        if(damage > thresStrength)
+        {
+            Debug.Log("You are strong enough");
+            TakeDamage(damage);
+        }
+        else
+        {
+            Debug.Log("You are too WEAK");
+            // ToDo audio feedback for ineffective attack
+        }
+        Debug.Log(barricadeHP);
+    }
+
+    private void TakeDamage(int damage)
+    {
+        barricadeHP -= damage;
         
+
+        // Destroy barricade when hp drops to or below 0
+        if(barricadeHP <= 0)
+        {
+            Destroy(gameObject);
+        }
+
     }
 
     private void barricadeTier()
@@ -48,6 +70,7 @@ public class BreakableBarricade : MonoBehaviour
                 break;
 
             default:
+                Debug.Log("Barricade tier not defined. Object may be tagged incorrectly or is not supposed to have BreakableBarricade component");
                 break;
         }
     }
