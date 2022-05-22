@@ -39,7 +39,6 @@ public class Interactable : MonoBehaviour
 
     private void PullSwitch()
     {
-        Debug.Log("I'm pulling a switch");
         // Works in tandem with TimedGate class. Assumes the switch is a child of the object with TimedGate
         TimedGate targetGate = gameObject.GetComponentInParent<TimedGate>();
         targetGate.OpenTheGate(); 
