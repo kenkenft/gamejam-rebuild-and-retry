@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     Vector2 directionAttack;
 
     public float attackRange = 2;
-    public int damage;
+    public int baseDamage = 4;
     private bool isAttacking;
 
     private bool isNearInteractable; 
@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
         if(hits.collider !=null)
         {
             // Debug.Log("Something hit");
-            hits.collider.GetComponent<Enemy>()?.TakeDamage(damage);
+            hits.collider.GetComponent<Enemy>()?.TakeDamage(baseDamage);
         }
         isAttacking= false;
     }
