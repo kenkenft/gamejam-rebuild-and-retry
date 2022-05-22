@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     private bool isNearInteractable; 
     private GameObject objectInteractable;
 
+    private Interactable interactableScript;
+
     public LayerMask groundLayerMask;
     public LayerMask enemyLayerMask;
 
@@ -70,9 +72,12 @@ public class Player : MonoBehaviour
             if(isNearInteractable)
             {
                 Debug.Log("Attempting to interact");
-                if(objectInteractable.CompareTag("Interact") == true )
+                if(objectInteractable.layer == 8 )      // Assumes layer 8 is Interact layer
                 {
                     Debug.Log("This is an interactable object");
+                    interactableScript = objectInteractable.GetComponent<Interactable>();
+                    interactableScript.WhichInteraction();
+
                 }
                 else
                 {
@@ -140,7 +145,10 @@ public class Player : MonoBehaviour
         // Debug.Log("Trigger Entered");
         isNearInteractable = true;
         // col.GetComponent<Transform>.name;
-        objectInteractable = col.gameObject;    // For calling methods within interactable object
+        if(col.gameObject.layer == 8)       // Assumes Layer 8 is "Interact" layer
+        {
+            objectInteractable = col.gameObject;    // For calling methods within interactable object
+        }
     }
 
     void OnTriggerExit2D(Collider2D col)
