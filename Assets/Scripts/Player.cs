@@ -13,9 +13,15 @@ public class Player : MonoBehaviour
     private BoxCollider2D playerCollider;
     private float playerColliderWidth;
     private float playerColliderWidthOffset;
-    private float raycastOffsetVert = -0.5f;
+    float faceDirection;
+    Vector2 directionAttack;
+
+    public float attackRange = 2;
+    public int damage;
+    private bool isAttacking;
 
     public LayerMask groundLayerMask;
+    public LayerMask enemyLayerMask;
 
     private Rigidbody2D rig;
 
@@ -30,27 +36,53 @@ public class Player : MonoBehaviour
         playerCollider = GetComponent<BoxCollider2D>(); // Get player collider width for use positioning the rays for the IsGrounded function 
         playerColliderWidth = playerCollider.size[0];
         playerColliderWidthOffset = playerColliderWidth + 0.1f;
+        isAttacking = false;
     }
 
     void Update()
     {
         
-        float moveAmount = Input.GetAxis("Horizontal") * playerSpeed;
+        faceDirection = Input.GetAxis("Horizontal");
+        if(faceDirection < 0f)
+        {
+            Debug.Log("I am facing to the Left");
+            directionAttack =  Vector2.left;        
+        }
+        if(faceDirection > 0f)
+        {
+            Debug.Log("I am facing to the Right");
+            directionAttack =  Vector2.right;             
+        }
+        // Debug.Log(faceDirection);
+        float moveAmount = faceDirection * playerSpeed;
         transform.Translate(moveAmount, 0, 0);
         if(Input.GetKeyDown(KeyCode.Space))
             Jump();
         VelocityDecay();                // Decays X, Y, and Z velocities over time
-        if(Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.E) && !isAttacking)
         {
             Attack();
+            
         }
+        Debug.DrawRay(transform.position, directionAttack, Color.red);
     }
 
     
     void Attack()
     {
-        Debug.Log("I am attacking");
+        isAttacking = true;
+        // Debug.Log("I am attacking");
+        RaycastHit2D hits = Physics2D.Raycast(transform.position, directionAttack, attackRange, enemyLayerMask);
+        if(hits.collider !=null)
+        {
+            // Debug.Log("Something hit");
+            hits.collider.GetComponent<Enemy>()?.TakeDamage(damage);
+        }
+        isAttacking= false;
     }
+
+
+
 
     void VelocityDecay()
     {
@@ -83,14 +115,4 @@ public class Player : MonoBehaviour
         return false;
     }//// End of IsGrounded()
     
-    //  private void OnDrawGizmos()
-    // {
-    //     Gizmos.color = Color.red;
-    //     //Draws the raycast projection in Unity
-    //     Gizmos.DrawRay(transform.position + (transform.forward * playerColliderWidthOffset) + (Vector3.up * raycastOffsetVert), Vector3.down);
-    //     Gizmos.DrawRay(transform.position + (-transform.forward * playerColliderWidthOffset) + (Vector3.up * raycastOffsetVert), Vector3.down);
-    //     Gizmos.DrawRay(transform.position + (transform.right * playerColliderWidthOffset) + (Vector3.up * raycastOffsetVert), Vector3.down);
-    //     Gizmos.DrawRay(transform.position + (-transform.right * playerColliderWidthOffset) + (Vector3.up * raycastOffsetVert), Vector3.down);
-    // }//// End of OnDrawGizmos()
-
 }
