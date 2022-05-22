@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     private bool isAttacking;
 
     private bool isNearInteractable; 
+    private GameObject objectInteractable;
 
     public LayerMask groundLayerMask;
     public LayerMask enemyLayerMask;
@@ -69,6 +70,14 @@ public class Player : MonoBehaviour
             if(isNearInteractable)
             {
                 Debug.Log("Attempting to interact");
+                if(objectInteractable.CompareTag("Interact") == true )
+                {
+                    Debug.Log("This is an interactable object");
+                }
+                else
+                {
+                    Debug.Log("NOT an interactable object");
+                }
             }
             else if(!isAttacking)
             {
@@ -128,15 +137,16 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("Trigger Entered");
+        // Debug.Log("Trigger Entered");
         isNearInteractable = true;
         // col.GetComponent<Transform>.name;
+        objectInteractable = col.gameObject;    // For calling methods within interactable object
     }
 
     void OnTriggerExit2D(Collider2D col)
     {
         
-        Debug.Log("Trigger Exited");
+        // Debug.Log("Trigger Exited");
         isNearInteractable = false;
         // col.GetComponent<Transform>.name;
     }
