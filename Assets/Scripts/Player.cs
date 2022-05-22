@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
             Debug.Log("I am facing to the Left");
             directionAttack =  Vector2.left;        
         }
-        if(faceDirection > 0f)
+        else if(faceDirection > 0f)
         {
             Debug.Log("I am facing to the Right");
             directionAttack =  Vector2.right;             
@@ -59,10 +59,10 @@ public class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
             Jump();
         VelocityDecay();                // Decays X, Y, and Z velocities over time
+        
         if(Input.GetKeyDown(KeyCode.E) && !isAttacking)
         {
             Attack();
-            
         }
         Debug.DrawRay(transform.position, directionAttack, Color.red);
     }
