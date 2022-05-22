@@ -14,7 +14,22 @@ public class Interactable : MonoBehaviour
 
     public void WhichInteraction()
     {
-        Debug.Log("What type of interaction is this?");
+        // Debug.Log("What type of interaction is this?");
+        
+        switch(tagType)
+        {
+            case "Door":
+                OpenDoor();
+                break;
+
+            case "Switch":
+                PullSwitch();
+                break;
+
+            default:
+                Debug.Log("Default Case trigged");
+                break;
+        }
     }
 
     private void OpenDoor()
