@@ -10,9 +10,11 @@ public class Player : MonoBehaviour
     [SerializeField] float jumpVelDecayHigh = 3.0f;       // Player upward velocity decay multiplier for "high" jumps
     [SerializeField] float jumpVelDecayLow = 5.0f;        // Player upward velocity decay multiplier for "lowJumpMultiplier" jumps
     
-    [SerializeField] int[] jumpTiers = {1, 0, 0, 0};     // Players always have tier 0 (i.e index 0) unlocked (set to true or 1)
-    [SerializeField] int[] speedTiers = {1, 0, 0, 0};
-    [SerializeField] int[] strengthTiers = {1, 0, 0, 0};
+    // [SerializeField] int[] jumpTiers = {1, 0, 0, 0};     // Players always have tier 0 (i.e index 0) unlocked (set to true or 1)
+    // [SerializeField] int[] speedTiers = {1, 0, 0, 0};
+    // [SerializeField] int[] strengthTiers = {1, 0, 0, 0};
+
+    [SerializeField] int[,] traitTiers = new int[3,4] { {1, 0, 0, 0}, {1, 0, 0, 0}, {1, 0, 0, 0}}; 
 
     private BoxCollider2D playerCollider;
     private float playerColliderWidth;
@@ -49,6 +51,9 @@ public class Player : MonoBehaviour
         playerColliderWidthOffset = playerColliderWidth + 0.1f;
         isAttacking = false;
         isNearInteractable = false;
+        // traitTiers = [jumpTiers, speedTiers, strengthTiers];
+        // traitTiers[1] = speedTiers; 
+        // traitTiers[2] = strengthTiers;
     }
 
     void Update()
@@ -73,17 +78,14 @@ public class Player : MonoBehaviour
         faceDirection = Input.GetAxis("Horizontal");
         if(faceDirection < 0f)
         {
-            // Debug.Log("I am facing to the Left");
             directionAttack =  Vector2.left;        
         }
         else if(faceDirection > 0f)
         {
-            // Debug.Log("I am facing to the Right");
             directionAttack =  Vector2.right;             
         }
-        // Debug.Log(faceDirection);
-        float moveAmount = faceDirection * (playerSpeed + (playerSpeed * speedTiers[1] * 0.5f));
-        // Debug.Log("Speed: " + moveAmount);
+        // float moveAmount = faceDirection * (playerSpeed + (playerSpeed * speedTiers[1] * 0.5f));
+        float moveAmount = faceDirection * (playerSpeed + (playerSpeed * traitTiers[1,1] * 0.5f));
         transform.Translate(moveAmount, 0, 0);
     }
 
@@ -116,7 +118,8 @@ public class Player : MonoBehaviour
         Collider2D hitsCollider = hits.collider;
         if(hitsCollider !=null)
         {
-            int damage = baseDamage * (strengthTiers[0] + strengthTiers[1] + strengthTiers[2]);
+            // int damage = baseDamage * (strengthTiers[0] + strengthTiers[1] + strengthTiers[2]);
+            int damage = baseDamage * (traitTiers[2,0] + traitTiers[2,1] + traitTiers[2,2]);
             Debug.Log("Damage: " + damage);
             if(hitsCollider.gameObject.CompareTag("Enemy"))
             {
@@ -147,7 +150,8 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        float jump = playerJump + (playerJump * jumpTiers[1] * 0.5f);
+        // float jump = playerJump + (playerJump * jumpTiers[1] * 0.5f);
+        float jump = playerJump + (playerJump * traitTiers[0,1] * 0.5f);
         Debug.Log("JumpPower: " + jump);
         if(IsGrounded())
             {
@@ -167,6 +171,20 @@ public class Player : MonoBehaviour
         }
         return false;
     }//// End of IsGrounded()
+
+    public void setTier(int trait, int tierNum)
+    {
+        if(unlockedTiers[trait]< 4)
+        {
+            unlockedTiers[trait] ++;
+            traitTiers[trait, tierNum] = 1;     // Set the trait to 1 i.e. player unlocked that trait.
+        }
+        else
+        {
+            Debug.Log("Max level reached for trait number: " + trait);
+        }
+
+    } 
 
     void OnTriggerEnter2D(Collider2D col)
     {

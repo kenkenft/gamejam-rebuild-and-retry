@@ -6,8 +6,16 @@ public class UpgradeMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject UpgradeMenuUI;
+    public GameObject player;
+
+    private Player playerScript;
 
     // Update is called once per frame
+
+    void Start()
+    {
+        playerScript = player.GetComponent<Player>();
+    }
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.R))
@@ -45,5 +53,10 @@ public class UpgradeMenu : MonoBehaviour
         Debug.Log("Menu Loaded");
     }
 
+    public void setTier1Jump()
+    {
+        playerScript.setTier(0,1);
+        Debug.Log("Tier 1 Jump : Unlocked!");
+    }
    
 }
