@@ -7,6 +7,7 @@ public class UpgradeMenu : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject UpgradeMenuUI;
     public GameObject player;
+    private UpgradeTierButton button;
 
     private Player playerScript;
 
@@ -57,6 +58,15 @@ public class UpgradeMenu : MonoBehaviour
     {
         playerScript.setTier(0,1);
         Debug.Log("Tier 1 Jump : Unlocked!");
+    }
+
+     
+    // Set UpgradeTierButton that called this function, and then get the button's target tier and target level
+    public void SetTargetButton(int traitNum, int traitTier)
+    {
+        Debug.Log("SetTargetButton method: " + traitNum + ", " + traitTier);
+        playerScript.setTier(traitNum,traitTier);
+        Debug.Log("Tier " + traitTier + traitNum + " : Unlocked!");
     }
    
 }

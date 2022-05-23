@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] int[] unlockedTiers = {0, 0, 0}; // Corresponds to [jump, speed, strength]. 0 is base level; 3 is max level
+    [SerializeField] int[] traitLevel = {0, 0, 0}; // Corresponds to [jump, speed, strength]. 0 is base level; 3 is max level
+    [SerializeField] int[,] unlockedTraits = new int[3,4] { {1, 0, 0, 0}, {1, 0, 0, 0}, {1, 0, 0, 0}}; 
     [SerializeField] float playerSpeed = 0.05f;     // Player's base speed
     [SerializeField] float playerJump = 5.0f;       // Player's base jump height
     [SerializeField] float jumpVelDecayHigh = 3.0f;       // Player upward velocity decay multiplier for "high" jumps
@@ -14,7 +15,7 @@ public class Player : MonoBehaviour
     // [SerializeField] int[] speedTiers = {1, 0, 0, 0};
     // [SerializeField] int[] strengthTiers = {1, 0, 0, 0};
 
-    [SerializeField] int[,] traitTiers = new int[3,4] { {1, 0, 0, 0}, {1, 0, 0, 0}, {1, 0, 0, 0}}; 
+    
 
     private BoxCollider2D playerCollider;
     private float playerColliderWidth;
@@ -85,7 +86,7 @@ public class Player : MonoBehaviour
             directionAttack =  Vector2.right;             
         }
         // float moveAmount = faceDirection * (playerSpeed + (playerSpeed * speedTiers[1] * 0.5f));
-        float moveAmount = faceDirection * (playerSpeed + (playerSpeed * traitTiers[1,1] * 0.5f));
+        float moveAmount = faceDirection * (playerSpeed + (playerSpeed * unlockedTraits[1,1] * 0.5f));
         transform.Translate(moveAmount, 0, 0);
     }
 
@@ -119,7 +120,7 @@ public class Player : MonoBehaviour
         if(hitsCollider !=null)
         {
             // int damage = baseDamage * (strengthTiers[0] + strengthTiers[1] + strengthTiers[2]);
-            int damage = baseDamage * (traitTiers[2,0] + traitTiers[2,1] + traitTiers[2,2]);
+            int damage = baseDamage * (unlockedTraits[2,0] + unlockedTraits[2,1] + unlockedTraits[2,2]);
             Debug.Log("Damage: " + damage);
             if(hitsCollider.gameObject.CompareTag("Enemy"))
             {
@@ -151,7 +152,7 @@ public class Player : MonoBehaviour
     void Jump()
     {
         // float jump = playerJump + (playerJump * jumpTiers[1] * 0.5f);
-        float jump = playerJump + (playerJump * traitTiers[0,1] * 0.5f);
+        float jump = playerJump + (playerJump * unlockedTraits[0,1] * 0.5f);
         Debug.Log("JumpPower: " + jump);
         if(IsGrounded())
             {
@@ -174,10 +175,11 @@ public class Player : MonoBehaviour
 
     public void setTier(int trait, int tierNum)
     {
-        if(unlockedTiers[trait]< 4)
+        // Check if that trait is already unlocked and whether the maximum trait level has been reached
+        if(unlockedTraits[trait, tierNum] == 0 && traitLevel[trait]< 4)
         {
-            unlockedTiers[trait] ++;
-            traitTiers[trait, tierNum] = 1;     // Set the trait to 1 i.e. player unlocked that trait.
+            traitLevel[trait] ++;       // Increment trait level by 1
+            unlockedTraits[trait, tierNum] = 1;     // Set the trait to 1 i.e. player unlocked that trait.
         }
         else
         {
