@@ -11,11 +11,6 @@ public class UpgradeTierButton : MonoBehaviour
     // Method that sends the button's target trait and level to be unlocked 
     public void SetButtonInUpgradeMenu()
     {
-        Debug.Log("SetButtonInUpgradeMenu method: " + traitNum + ", " + traitTier);
-        // int[] buttonTarget = {traitNum, traitTier};
         UpgradeMenuUI.GetComponent<UpgradeMenu>()?.SetTargetButton(traitNum, traitTier);
-        Debug.Log("SetButtonInUpgradeMenu method: Complete");
-        
-        // return buttonTarget;
     }
 }

@@ -32,7 +32,6 @@ public class UpgradeMenu : MonoBehaviour
         }
     }
 
-    // TODO Method that affects player traits
     // TODO method that locks tiers of skills unless previous tier is unlocked
 
     public void Resume()
@@ -54,19 +53,23 @@ public class UpgradeMenu : MonoBehaviour
         Debug.Log("Menu Loaded");
     }
 
-    public void setTier1Jump()
-    {
-        playerScript.setTier(0,1);
-        Debug.Log("Tier 1 Jump : Unlocked!");
-    }
+    // public void setTier1Jump()
+    // {
+    //     playerScript.setTier(0,1);
+    //     Debug.Log("Tier 1 Jump : Unlocked!");
+    // }
 
      
     // Set UpgradeTierButton that called this function, and then get the button's target tier and target level
     public void SetTargetButton(int traitNum, int traitTier)
     {
-        Debug.Log("SetTargetButton method: " + traitNum + ", " + traitTier);
+        // Debug.Log("SetTargetButton method: " + traitNum + ", " + traitTier);
         playerScript.setTier(traitNum,traitTier);
-        Debug.Log("Tier " + traitTier + traitNum + " : Unlocked!");
+        
+        // Debugging messages
+        string[] traitName = {"Jump", "Speed", "Strength"};
+        string[] traitLevel = {"Tier 0", "Tier 1", "Tier 2", "Tier 3"};
+        Debug.Log(traitLevel[traitTier] + " "+ traitName[traitNum] + " : Unlocked!");
     }
    
 }

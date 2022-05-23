@@ -21,12 +21,12 @@ public class BreakableBarricade : MonoBehaviour
     {
         if(damage > thresStrength)
         {
-            Debug.Log("You are strong enough");
+            // Debug.Log("You are strong enough");
             TakeDamage(damage);
         }
         else
         {
-            Debug.Log("You are too WEAK");
+            // Debug.Log("You are too WEAK");
             // ToDo audio feedback for ineffective attack
         }
         Debug.Log(barricadeHP);

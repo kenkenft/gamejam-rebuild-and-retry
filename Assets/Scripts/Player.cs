@@ -176,14 +176,19 @@ public class Player : MonoBehaviour
     public void setTier(int trait, int tierNum)
     {
         // Check if that trait is already unlocked and whether the maximum trait level has been reached
-        if(unlockedTraits[trait, tierNum] == 0 && traitLevel[trait]< 4)
+        if(unlockedTraits[trait, tierNum] == 1)
         {
-            traitLevel[trait] ++;       // Increment trait level by 1
-            unlockedTraits[trait, tierNum] = 1;     // Set the trait to 1 i.e. player unlocked that trait.
+            Debug.Log("Tier: " + tierNum + " " + trait + " already unlocked");
+        }
+        else if(traitLevel[trait]>= 3)
+        {
+            Debug.Log("Max level reached for trait number: " + trait);
+            
         }
         else
         {
-            Debug.Log("Max level reached for trait number: " + trait);
+            traitLevel[trait] ++;       // Increment trait level by 1
+            unlockedTraits[trait, tierNum] = 1;     // Set the trait to 1 i.e. player unlocked that trait.
         }
 
     } 
