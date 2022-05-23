@@ -50,23 +50,23 @@ public class BreakableBarricade : MonoBehaviour
         switch(tagType)
         {
             case "str-tier-0":
-                barricadeHP = 8;
+                barricadeHP = 9;
                 thresStrength = 3;          // If damage is lower than thresStrength, then barricade does not lose Hp
                 break;
 
             case "str-tier-1":
-                barricadeHP = 13;
-                thresStrength = 5;
+                barricadeHP = 17;
+                thresStrength = 7;
                 break;
 
             case "str-tier-2":
-                barricadeHP = 16;
-                thresStrength = 7;
+                barricadeHP = 24;
+                thresStrength = 11;
                 break;
 
             case "str-tier-3":
                 barricadeHP = 16;
-                thresStrength = 11;
+                thresStrength = 15;
                 break;
 
             default:

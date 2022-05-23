@@ -23,6 +23,9 @@ public class UpgradeMenu : MonoBehaviour
         }
     }
 
+    // TODO Method that affects player traits
+    // TODO method that locks tiers of skills unless previous tier is unlocked
+
     public void Resume()
     {
         UpgradeMenuUI.SetActive(false);
