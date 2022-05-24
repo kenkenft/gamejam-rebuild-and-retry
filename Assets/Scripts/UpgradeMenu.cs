@@ -70,6 +70,7 @@ public class UpgradeMenu : MonoBehaviour
         string[] traitName = {"Jump", "Speed", "Strength"};
         string[] traitLevel = {"Tier 0", "Tier 1", "Tier 2", "Tier 3"};
         Debug.Log(traitLevel[traitTier] + " "+ traitName[traitNum] + " : Unlocked!");
+
     }
    
 }
