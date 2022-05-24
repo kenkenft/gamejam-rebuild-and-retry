@@ -11,11 +11,6 @@ public class Player : MonoBehaviour
     [SerializeField] float jumpVelDecayHigh = 3.0f;       // Player upward velocity decay multiplier for "high" jumps
     [SerializeField] float jumpVelDecayLow = 5.0f;        // Player upward velocity decay multiplier for "lowJumpMultiplier" jumps
     
-    // [SerializeField] int[] jumpTiers = {1, 0, 0, 0};     // Players always have tier 0 (i.e index 0) unlocked (set to true or 1)
-    // [SerializeField] int[] speedTiers = {1, 0, 0, 0};
-    // [SerializeField] int[] strengthTiers = {1, 0, 0, 0};
-
-    
 
     private BoxCollider2D playerCollider;
     private float playerColliderWidth;
@@ -26,6 +21,7 @@ public class Player : MonoBehaviour
     public float attackRange = 2;
     public int baseDamage = 4;
     private bool isAttacking;
+    private bool canJumpAgain = false;
 
     
 
@@ -52,9 +48,6 @@ public class Player : MonoBehaviour
         playerColliderWidthOffset = playerColliderWidth + 0.1f;
         isAttacking = false;
         isNearInteractable = false;
-        // traitTiers = [jumpTiers, speedTiers, strengthTiers];
-        // traitTiers[1] = speedTiers; 
-        // traitTiers[2] = strengthTiers;
     }
 
     void Update()
@@ -68,9 +61,7 @@ public class Player : MonoBehaviour
         
         // Check if player is attacking or interacting something
         if(Input.GetKeyDown(KeyCode.E))
-        {
             interactOrAttack();
-        }
         // Debug.DrawRay(transform.position, directionAttack, Color.red);
     }
 
@@ -78,14 +69,9 @@ public class Player : MonoBehaviour
     {
         faceDirection = Input.GetAxis("Horizontal");
         if(faceDirection < 0f)
-        {
             directionAttack =  Vector2.left;        
-        }
         else if(faceDirection > 0f)
-        {
             directionAttack =  Vector2.right;             
-        }
-        // float moveAmount = faceDirection * (playerSpeed + (playerSpeed * speedTiers[1] * 0.5f));
         float moveAmount = faceDirection * (playerSpeed + (playerSpeed * unlockedTraits[1,1] * 0.5f));
         transform.Translate(moveAmount, 0, 0);
     }
@@ -102,14 +88,10 @@ public class Player : MonoBehaviour
                     interactableScript.WhichInteraction();
                 }
                 else
-                {
                     Debug.Log("NOT an interactable object");
-                }
             }
             else if(!isAttacking)
-            {
                 Attack();
-            }
     }
 
     void Attack()
@@ -119,18 +101,13 @@ public class Player : MonoBehaviour
         Collider2D hitsCollider = hits.collider;
         if(hitsCollider !=null)
         {
-            // int damage = baseDamage * (strengthTiers[0] + strengthTiers[1] + strengthTiers[2]);
+
             int damage = baseDamage * (unlockedTraits[2,0] + unlockedTraits[2,1] + unlockedTraits[2,2]);
             Debug.Log("Damage: " + damage);
             if(hitsCollider.gameObject.CompareTag("Enemy"))
-            {
                 hitsCollider.GetComponent<Enemy>()?.TakeDamage(damage);
-            }
             else
-            {
-               // Assumes that there are only enemies and barricades to hit in this game
-                hitsCollider.GetComponent<BreakableBarricade>()?.CheckStrongEnough(damage);
-            }
+                hitsCollider.GetComponent<BreakableBarricade>()?.CheckStrongEnough(damage); // Assumes that there are only enemies and barricades to hit in this game
         }
         isAttacking= false;
     }
@@ -141,35 +118,38 @@ public class Player : MonoBehaviour
     void VelocityDecay()
     {
         if(rig.velocity.y < 0)              // Reduces floatiness of jumps
-        {
-            rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayHigh * Time.deltaTime;               // Start increasing downward velocity once peak of jump is reached
-        } else if(rig.velocity.y > 0 && !Input.GetButton("Jump"))
-            {
-                rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayLow * Time.deltaTime;                // Start increasing downward velocity once player lets go of jump input
-            }
+            rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayHigh * Time.deltaTime;    
+        else if(canJumpAgain && !Input.GetButton("Jump"))
+            rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayHigh * Time.deltaTime;           // Start increasing downward velocity once peak of jump is reached
+        else if(rig.velocity.y > 0 && !Input.GetButton("Jump"))
+            rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayLow * Time.deltaTime;                // Start increasing downward velocity once player lets go of jump input
+        
     }//// End of VelocityDecay()
 
     void Jump()
     {
-        // float jump = playerJump + (playerJump * jumpTiers[1] * 0.5f);
-        float jump = playerJump + (playerJump * unlockedTraits[0,1] * 0.5f);
+        float jump = playerJump + (playerJump * unlockedTraits[0,1] * 0.5f);    // Calculate jump power. Player jumps higher if Tier 1 jump is unlocked
         Debug.Log("JumpPower: " + jump);
-        if(IsGrounded())
-            {
-                
-                // Add force upwards to rigidbody. Player jumps higher if Tier 1 jump is unlocked
-                rig.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
-            }
-        // TODO double jump check
+        if(IsGrounded())    // Jump whilst on ground
+        {
+            rig.AddForce(Vector2.up * jump, ForceMode2D.Impulse);  // Add force upwards to rigidbody.
+            Debug.Log("Jumping from GROUND");
+            canJumpAgain = true; 
+        }
+        else if(canJumpAgain && unlockedTraits[0,2] == 1)    // Jump a second time if Tier 2 jump unlocked
+        {
+            canJumpAgain = false;
+            rig.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
+            Debug.Log("DOUBLE JUMPING");
+        }
+
     }
 
     bool IsGrounded ()
     {
-         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, groundLayerMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, groundLayerMask);
         if (hit.collider != null) 
-        {
             return true;
-        }
         return false;
     }//// End of IsGrounded()
 
@@ -177,14 +157,9 @@ public class Player : MonoBehaviour
     {
         // Check if that trait is already unlocked and whether the maximum trait level has been reached
         if(unlockedTraits[trait, tierNum] == 1)
-        {
             Debug.Log("Tier: " + tierNum + " " + trait + " already unlocked");
-        }
         else if(traitLevel[trait]>= 3)
-        {
             Debug.Log("Max level reached for trait number: " + trait);
-            
-        }
         else
         {
             traitLevel[trait] ++;       // Increment trait level by 1
@@ -197,14 +172,18 @@ public class Player : MonoBehaviour
     {
         isNearInteractable = true;
         if(col.gameObject.layer == 8)       // Assumes Layer 8 is "Interact" layer
-        {
             objectInteractable = col.gameObject;    // For calling methods within interactable object
-        }
     }
 
     void OnTriggerExit2D(Collider2D col)
     {
         isNearInteractable = false;
+    }
+
+    void OnCollisionEnter2D()
+    {
+        // canJumpAgain = true;        // Reset player double jump on contact with ground
+        Debug.Log("Collision detected");
     }
     
 }
