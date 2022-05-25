@@ -10,7 +10,8 @@ public class Player : MonoBehaviour
     [SerializeField] float playerJump = 5.0f;       // Player's base jump height
     [SerializeField] float jumpVelDecayHigh = 3.0f;       // Player upward velocity decay multiplier for "high" jumps
     [SerializeField] float jumpVelDecayLow = 5.0f;        // Player upward velocity decay multiplier for "lowJumpMultiplier" jumps
-    
+    [SerializeField] float jumpHoverReduction = 0.0001f;
+    private float jumpTierFallReduction;
 
     private BoxCollider2D playerCollider;
     private float playerColliderWidth;
@@ -117,29 +118,18 @@ public class Player : MonoBehaviour
 
     void VelocityDecay()
     {
-        // if(unlockedTraits[0,3] == 1 && Input.GetButton("Jump"))
-        //     {
-        //         rig.velocity = Vector2.up * -0.005f;
-        //         Debug.Log("Hover Mode engaged");
-        //     }
-        // else if(rig.velocity.y < 0)              // Reduces floatiness of jumps
-        //     rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayHigh * Time.deltaTime;    
-        // else if(canJumpAgain && !Input.GetButton("Jump"))
-        //     rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayHigh * Time.deltaTime;           // Start increasing downward velocity once peak of jump is reached
-        // else if(rig.velocity.y > 0 && !Input.GetButton("Jump"))
-        //     rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayLow * Time.deltaTime;                // Start increasing downward velocity once player lets go of jump input
-        
+        // Augments player fall speed if Tier-3 jump is unlocked and jump button is held down
         if(unlockedTraits[0,3] == 1 && Input.GetButton("Jump"))
-            {
-                rig.velocity = Vector2.up * -0.005f;
-                Debug.Log("Hover Mode engaged");
-            }
+            jumpTierFallReduction = 0.0005f;
+        else
+            jumpTierFallReduction = 1f;         // No reduction from Tier-3 hover
+
         if(rig.velocity.y < 0)              // Reduces floatiness of jumps
-            rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayHigh * Time.deltaTime;    
+            rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayHigh * jumpTierFallReduction * Time.deltaTime;    
         else if(canJumpAgain && !Input.GetButton("Jump"))
-            rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayHigh * Time.deltaTime;           // Start increasing downward velocity once peak of jump is reached
+            rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayHigh * jumpTierFallReduction * Time.deltaTime;           // Start increasing downward velocity once peak of jump is reached
         else if(rig.velocity.y > 0 && !Input.GetButton("Jump"))
-            rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayLow * Time.deltaTime;                // Start increasing downward velocity once player lets go of jump input
+            rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayLow * jumpTierFallReduction * Time.deltaTime;                // Start increasing downward velocity once player lets go of jump input
         
     }//// End of VelocityDecay()
 
