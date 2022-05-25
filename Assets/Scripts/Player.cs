@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] float playerSpeed = 5f;     // Player's base speed
     [SerializeField] float tier1SpeedBonus = 0.75f;     // Speed bonus from Tier-1 Speed upgrade
     [SerializeField] float tier2SpeedBonus = 1.50f;     // Speed bonus from Tier-2 Speed sprint upgrade
+    [SerializeField] float tier3SpeedBonus = 3.00f;     // Speed bonus from Tier-3 Speed dash upgrade
     [SerializeField] float playerJump = 5.0f;       // Player's base jump height
     [SerializeField] float jumpVelDecayHigh = 3.0f;       // Player upward velocity decay multiplier for "high" jumps
     [SerializeField] float jumpVelDecayLow = 5.0f;        // Player upward velocity decay multiplier for "lowJumpMultiplier" jumps
@@ -19,7 +20,10 @@ public class Player : MonoBehaviour
     private float playerColliderWidth;
     private float playerColliderWidthOffset;
     float faceDirection;
-    Vector2 directionAttack;
+    Vector2 directionAttack = Vector2.right;
+    float playerSpeedMax;       // For Tier-0 and Tier-1 speed limit
+    float playerSpeedMaxTier2;       // For Tier-2 speed limit
+    float playerSpeedMaxTier3;       // For Tier-3 speed limit
 
     public float attackRange = 2;
     public int baseDamage = 4;
@@ -28,8 +32,11 @@ public class Player : MonoBehaviour
     private bool isAttacking;
     private bool canJumpAgain = false;
     private bool isSprinting = false;
+    private bool isDashing = false;
+    private bool isSprintRecharging = false;
 
-    
+    private float tapSpeed = 0.5f;
+    private float lastTapTime = 0f;     
 
     private bool isNearInteractable; 
     private GameObject objectInteractable;
@@ -54,6 +61,9 @@ public class Player : MonoBehaviour
         playerColliderWidthOffset = playerColliderWidth + 0.1f;
         isAttacking = false;
         isNearInteractable = false;
+        playerSpeedMax = playerSpeed;
+        playerSpeedMaxTier2 = playerSpeed * (1 + tier1SpeedBonus + tier2SpeedBonus);
+        playerSpeedMaxTier3 = playerSpeed * (1 + tier1SpeedBonus + tier2SpeedBonus + tier3SpeedBonus);
     }
 
     void Update()
@@ -61,6 +71,18 @@ public class Player : MonoBehaviour
         // Player movement
         Move();
 
+        if((Input.GetKeyDown(KeyCode.LeftShift) && unlockedTraits[1,3] == 1))
+            {
+                if((Time.time - lastTapTime) < tapSpeed)
+                { 
+                    isDashing = true;
+                    Debug.Log("Engaging Dash");
+                }
+                else
+                    Debug.Log("Dash Not Engaged");
+                lastTapTime = Time.time;
+            }
+        
         if(Input.GetKey(KeyCode.LeftShift) && unlockedTraits[1,2] == 1)
             isSprinting = true;
         else
@@ -83,15 +105,61 @@ public class Player : MonoBehaviour
             directionAttack =  Vector2.left;        
         else if(faceDirection > 0f)
             directionAttack =  Vector2.right;
+        // Otherwise, keep facing in the current direction
 
         float moveAmount;
-        if(isSprinting)
-            moveAmount = faceDirection * (playerSpeed + (playerSpeed * unlockedTraits[1,1] * tier1SpeedBonus) + (playerSpeed * unlockedTraits[1,2] * tier2SpeedBonus));
-        else
-            moveAmount = faceDirection * (playerSpeed + (playerSpeed * unlockedTraits[1,1] * tier1SpeedBonus));
+        // Vector2 moveAmount;
+        // if(!isDashing || isSprintRecharging)
+        // {
+            
+            if(isSprinting)
+            {
+                if(!isDashing || isSprintRecharging)
+                {
+                    moveAmount = faceDirection * (playerSpeed + playerSpeed * ((unlockedTraits[1,1] * tier1SpeedBonus) + (unlockedTraits[1,2] * tier2SpeedBonus)));
+                    ClampSpeed(moveAmount, playerSpeedMaxTier2);
+                }
+                else
+                {
+                    moveAmount = faceDirection * (playerSpeed + playerSpeed * ((unlockedTraits[1,1] * tier1SpeedBonus) + (unlockedTraits[1,2] * tier2SpeedBonus) + (unlockedTraits[1,3] * tier3SpeedBonus)));
+                    ClampSpeed(moveAmount, playerSpeedMaxTier3);
+                }
+            }
+            else
+            {
+                if(!isDashing || isSprintRecharging)
+                {
+                    moveAmount = faceDirection * (playerSpeed + (playerSpeed * unlockedTraits[1,1] * tier1SpeedBonus));
+                    ClampSpeed(moveAmount, playerSpeedMax);
+                }
+                else
+                {
+                    moveAmount = faceDirection * (playerSpeed + playerSpeed * ((unlockedTraits[1,1] * tier1SpeedBonus) + (unlockedTraits[1,2] * tier2SpeedBonus) + (unlockedTraits[1,3] * tier3SpeedBonus)));
+                    ClampSpeed(moveAmount, playerSpeedMaxTier3);
+                }
+            }
+            // transform.Translate(moveAmount, 0, 0);
+            // rig.velocity = new Vector2 (moveAmount, rig.velocity.y);
+        // }
+        // else
+        // {
+        //     moveAmount = faceDirection * (playerSpeed + playerSpeed * ((unlockedTraits[1,1] * tier1SpeedBonus) + (unlockedTraits[1,2] * tier2SpeedBonus) + (unlockedTraits[1,3] * tier3SpeedBonus)));
+        //     ClampSpeed(moveAmount, playerSpeedMaxTier3);
+        // }
+    }
 
-        // transform.Translate(moveAmount, 0, 0);
-        rig.velocity = new Vector2 (moveAmount, rig.velocity.y);
+    void ClampSpeed(float moveAmount, float speedLimit)
+    {
+            Vector2 mask = new Vector2(moveAmount, rig.velocity.y); 
+            rig.AddForce(mask, ForceMode2D.Impulse);
+            mask = rig.velocity;
+            mask.x = Mathf.Clamp( rig.velocity.x, -speedLimit, speedLimit);             // Limit player's velocity
+            mask.y = Mathf.Clamp( rig.velocity.y, -speedLimit, speedLimit);
+            rig.velocity = mask;
+    }
+    void EndDash()
+    {
+        isDashing = false;
     }
 
     void interactOrAttack()
@@ -202,6 +270,11 @@ public class Player : MonoBehaviour
         {
             traitLevel[trait] ++;       // Increment trait level by 1
             unlockedTraits[trait, tierNum] = 1;     // Set the trait to 1 i.e. player unlocked that trait.
+            // Increase speed limit for player if speed has been upgraded
+            if(tierNum == 1)
+                {
+                    playerSpeedMax = playerSpeed * (1 + tier1SpeedBonus);
+                }
         }
 
     } 
