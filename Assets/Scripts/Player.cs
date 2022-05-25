@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
 
     public float attackRange = 2;
     public int baseDamage = 4;
+    public float chargeTimeThresh = 3f;
+    private float chargeTimer = 0f;
     private bool isAttacking;
     private bool canJumpAgain = false;
 
@@ -59,9 +61,9 @@ public class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
             Jump();
         VelocityDecay();                // Decays X, and Y velocities over time
-        
+
         // Check if player is attacking or interacting something
-        if(Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKey(KeyCode.E)|| Input.GetKeyUp(KeyCode.E))
             interactOrAttack();
         // Debug.DrawRay(transform.position, directionAttack, Color.red);
     }
@@ -81,29 +83,48 @@ public class Player : MonoBehaviour
     {
         if(isNearInteractable)
             {
-                Debug.Log("Attempting to interact");
+                // Debug.Log("Attempting to interact");
                 if(objectInteractable.layer == 8 )      // Assumes layer 8 is Interact layer
                 {
-                    Debug.Log("This is an interactable object");
+                    // Debug.Log("This is an interactable object");
                     interactableScript = objectInteractable.GetComponent<Interactable>();
                     interactableScript.WhichInteraction();
                 }
                 else
                     Debug.Log("NOT an interactable object");
             }
-            else if(!isAttacking)
-                Attack();
+        else
+            {
+                // (!isAttacking)
+                int damage;
+                damage = baseDamage * (unlockedTraits[2,0] + unlockedTraits[2,1] + unlockedTraits[2,2]);
+
+                if(unlockedTraits[2,3] == 1 && Input.GetKey(KeyCode.E))
+                    chargeTimer += Time.deltaTime;
+
+                if(Input.GetKeyUp(KeyCode.E) && chargeTimer >= chargeTimeThresh && unlockedTraits[2,3] == 1)
+                {
+                    damage += damage;       // Double the damage
+                    Attack(damage);
+                    Debug.Log("Charge Attack!");
+                    chargeTimer = 0f;
+                }
+                else if(Input.GetKeyUp(KeyCode.E) || (Input.GetKeyUp(KeyCode.E) && chargeTimer < chargeTimeThresh && unlockedTraits[2,3] == 1))
+                {
+                    Attack(damage);
+                    Debug.Log("Normal Attack");
+                    chargeTimer = 0f;
+                }
+            }
     }
 
-    void Attack()
+    void Attack(int damage)
     {
         isAttacking = true;
         RaycastHit2D hits = Physics2D.Raycast(transform.position, directionAttack, attackRange, enemyLayerMask);
         Collider2D hitsCollider = hits.collider;
         if(hitsCollider !=null)
         {
-
-            int damage = baseDamage * (unlockedTraits[2,0] + unlockedTraits[2,1] + unlockedTraits[2,2]);
             Debug.Log("Damage: " + damage);
             if(hitsCollider.gameObject.CompareTag("Enemy"))
                 hitsCollider.GetComponent<Enemy>()?.TakeDamage(damage);
@@ -120,7 +141,7 @@ public class Player : MonoBehaviour
     {
         // Augments player fall speed if Tier-3 jump is unlocked and jump button is held down
         if(unlockedTraits[0,3] == 1 && Input.GetButton("Jump"))
-            jumpTierFallReduction = 0.0005f;
+            jumpTierFallReduction = jumpHoverReduction;
         else
             jumpTierFallReduction = 1f;         // No reduction from Tier-3 hover
 
