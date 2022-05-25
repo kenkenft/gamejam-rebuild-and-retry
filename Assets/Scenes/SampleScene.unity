@@ -179,6 +179,8 @@ MonoBehaviour:
   UpgradeMenuUI: {fileID: 307123754}
   traitNum: 0
   traitTier: 3
+  nextTier: {fileID: 0}
+  isActiveOngameStart: 0
 --- !u!114 &31460329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2702,6 +2704,8 @@ MonoBehaviour:
   UpgradeMenuUI: {fileID: 307123754}
   traitNum: 2
   traitTier: 1
+  nextTier: {fileID: 1428200211}
+  isActiveOngameStart: 1
 --- !u!114 &1190976544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3113,6 +3117,8 @@ MonoBehaviour:
   UpgradeMenuUI: {fileID: 307123754}
   traitNum: 2
   traitTier: 2
+  nextTier: {fileID: 1918438822}
+  isActiveOngameStart: 0
 --- !u!114 &1428200211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3263,6 +3269,8 @@ MonoBehaviour:
   UpgradeMenuUI: {fileID: 307123754}
   traitNum: 1
   traitTier: 1
+  nextTier: {fileID: 1942191733}
+  isActiveOngameStart: 1
 --- !u!114 &1438229314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3713,6 +3721,8 @@ MonoBehaviour:
   UpgradeMenuUI: {fileID: 307123754}
   traitNum: 2
   traitTier: 3
+  nextTier: {fileID: 0}
+  isActiveOngameStart: 0
 --- !u!114 &1918438822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3863,6 +3873,8 @@ MonoBehaviour:
   UpgradeMenuUI: {fileID: 307123754}
   traitNum: 1
   traitTier: 2
+  nextTier: {fileID: 2035176729}
+  isActiveOngameStart: 0
 --- !u!114 &1942191733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4023,7 +4035,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -4107,6 +4119,8 @@ MonoBehaviour:
   UpgradeMenuUI: {fileID: 307123754}
   traitNum: 0
   traitTier: 1
+  nextTier: {fileID: 1962997977}
+  isActiveOngameStart: 1
 --- !u!1 &1962997974
 GameObject:
   m_ObjectHideFlags: 0
@@ -4163,6 +4177,8 @@ MonoBehaviour:
   UpgradeMenuUI: {fileID: 307123754}
   traitNum: 0
   traitTier: 2
+  nextTier: {fileID: 31460329}
+  isActiveOngameStart: 0
 --- !u!114 &1962997977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4313,6 +4329,8 @@ MonoBehaviour:
   UpgradeMenuUI: {fileID: 307123754}
   traitNum: 1
   traitTier: 3
+  nextTier: {fileID: 0}
+  isActiveOngameStart: 0
 --- !u!114 &2035176729
 MonoBehaviour:
   m_ObjectHideFlags: 0

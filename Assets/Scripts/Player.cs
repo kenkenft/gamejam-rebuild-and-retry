@@ -117,12 +117,24 @@ public class Player : MonoBehaviour
 
     void VelocityDecay()
     {
+        // if(unlockedTraits[0,3] == 1 && Input.GetButton("Jump"))
+        //     {
+        //         rig.velocity = Vector2.up * -0.005f;
+        //         Debug.Log("Hover Mode engaged");
+        //     }
+        // else if(rig.velocity.y < 0)              // Reduces floatiness of jumps
+        //     rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayHigh * Time.deltaTime;    
+        // else if(canJumpAgain && !Input.GetButton("Jump"))
+        //     rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayHigh * Time.deltaTime;           // Start increasing downward velocity once peak of jump is reached
+        // else if(rig.velocity.y > 0 && !Input.GetButton("Jump"))
+        //     rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayLow * Time.deltaTime;                // Start increasing downward velocity once player lets go of jump input
+        
         if(unlockedTraits[0,3] == 1 && Input.GetButton("Jump"))
             {
-                rig.velocity += Vector2.up * 0.000001f * Time.deltaTime;
+                rig.velocity = Vector2.up * -0.005f;
                 Debug.Log("Hover Mode engaged");
             }
-        else if(rig.velocity.y < 0)              // Reduces floatiness of jumps
+        if(rig.velocity.y < 0)              // Reduces floatiness of jumps
             rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayHigh * Time.deltaTime;    
         else if(canJumpAgain && !Input.GetButton("Jump"))
             rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayHigh * Time.deltaTime;           // Start increasing downward velocity once peak of jump is reached
@@ -137,15 +149,13 @@ public class Player : MonoBehaviour
         // Debug.Log("JumpPower: " + jump);
         if(IsGrounded())    // Jump whilst on ground
         {
-            rig.AddForce(Vector2.up * jump, ForceMode2D.Impulse);  // Add force upwards to rigidbody.
-            // Debug.Log("Jumping from GROUND");
+            rig.velocity = Vector2.up * jump;
             canJumpAgain = true; 
         }
         else if(canJumpAgain && unlockedTraits[0,2] == 1)    // Jump a second time if Tier 2 jump unlocked
         {
+            rig.velocity = Vector2.up * jump;
             canJumpAgain = false;
-            rig.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
-            // Debug.Log("DOUBLE JUMPING");
         }
 
     }
