@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] float tier2SpeedBonus = 1.50f;     // Speed bonus from Tier-2 Speed sprint upgrade
     [SerializeField] float tier3SpeedBonus = 3.00f;     // Speed bonus from Tier-3 Speed dash upgrade
     [SerializeField] float playerJump = 5.0f;       // Player's base jump height
+    [SerializeField] float tier1JumpBonus = 2.0f;
     [SerializeField] float jumpVelDecayHigh = 3.0f;       // Player upward velocity decay multiplier for "high" jumps
     [SerializeField] float jumpVelDecayLow = 5.0f;        // Player upward velocity decay multiplier for "lowJumpMultiplier" jumps
     [SerializeField] float jumpHoverReduction = 0.0001f;
@@ -150,7 +151,7 @@ public class Player : MonoBehaviour
 
     void ClampSpeed(float moveAmount, float speedLimit)
     {
-            Vector2 mask = new Vector2(moveAmount, rig.velocity.y); 
+            Vector2 mask = new Vector2(moveAmount, 0); 
             rig.AddForce(mask, ForceMode2D.Impulse);
             mask = rig.velocity;
             mask.x = Mathf.Clamp( rig.velocity.x, -speedLimit, speedLimit);             // Limit player's velocity
@@ -227,8 +228,8 @@ public class Player : MonoBehaviour
 
         if(rig.velocity.y < 0)              // Reduces floatiness of jumps
             rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayHigh * jumpTierFallReduction * Time.deltaTime;    
-        else if(canJumpAgain && !Input.GetButton("Jump"))
-            rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayHigh * jumpTierFallReduction * Time.deltaTime;           // Start increasing downward velocity once peak of jump is reached
+        // else if(canJumpAgain && !Input.GetButton("Jump"))
+        //     rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayHigh * jumpTierFallReduction * Time.deltaTime;           // Start increasing downward velocity once peak of jump is reached
         else if(rig.velocity.y > 0 && !Input.GetButton("Jump"))
             rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayLow * jumpTierFallReduction * Time.deltaTime;                // Start increasing downward velocity once player lets go of jump input
         
@@ -236,16 +237,19 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        float jump = playerJump + (playerJump * unlockedTraits[0,1] * 0.5f);    // Calculate jump power. Player jumps higher if Tier 1 jump is unlocked
+        float jump = playerJump + (playerJump * unlockedTraits[0,1] * tier1JumpBonus);    // Calculate jump power. Player jumps higher if Tier 1 jump is unlocked
         // Debug.Log("JumpPower: " + jump);
+        // Vector2 mask = new Vector2(rig.velocity.x, jump);
         if(IsGrounded())    // Jump whilst on ground
         {
-            rig.velocity = Vector2.up * jump;
+            rig.velocity = Vector2.up * jump; 
+            // rig.AddForce(mask, ForceMode2D.Impulse);
             canJumpAgain = true; 
         }
         else if(canJumpAgain && unlockedTraits[0,2] == 1)    // Jump a second time if Tier 2 jump unlocked
         {
             rig.velocity = Vector2.up * jump;
+            // rig.AddForce(mask, ForceMode2D.Impulse);
             canJumpAgain = false;
         }
 
