@@ -6,7 +6,9 @@ public class Player : MonoBehaviour
 {
     [SerializeField] int[] traitLevel = {0, 0, 0}; // Corresponds to [jump, speed, strength]. 0 is base level; 3 is max level
     [SerializeField] int[,] unlockedTraits = new int[3,4] { {1, 0, 0, 0}, {1, 0, 0, 0}, {1, 0, 0, 0}}; 
-    [SerializeField] float playerSpeed = 0.05f;     // Player's base speed
+    [SerializeField] float playerSpeed = 5f;     // Player's base speed
+    [SerializeField] float tier1SpeedBonus = 0.75f;     // Speed bonus from Tier-1 Speed upgrade
+    [SerializeField] float tier2SpeedBonus = 1.50f;     // Speed bonus from Tier-2 Speed sprint upgrade
     [SerializeField] float playerJump = 5.0f;       // Player's base jump height
     [SerializeField] float jumpVelDecayHigh = 3.0f;       // Player upward velocity decay multiplier for "high" jumps
     [SerializeField] float jumpVelDecayLow = 5.0f;        // Player upward velocity decay multiplier for "lowJumpMultiplier" jumps
@@ -25,6 +27,7 @@ public class Player : MonoBehaviour
     private float chargeTimer = 0f;
     private bool isAttacking;
     private bool canJumpAgain = false;
+    private bool isSprinting = false;
 
     
 
@@ -58,6 +61,11 @@ public class Player : MonoBehaviour
         // Player movement
         Move();
 
+        if(Input.GetKey(KeyCode.LeftShift) && unlockedTraits[1,2] == 1)
+            isSprinting = true;
+        else
+            isSprinting = false;
+
         if(Input.GetKeyDown(KeyCode.Space))
             Jump();
         VelocityDecay();                // Decays X, and Y velocities over time
@@ -74,9 +82,16 @@ public class Player : MonoBehaviour
         if(faceDirection < 0f)
             directionAttack =  Vector2.left;        
         else if(faceDirection > 0f)
-            directionAttack =  Vector2.right;             
-        float moveAmount = faceDirection * (playerSpeed + (playerSpeed * unlockedTraits[1,1] * 0.5f));
-        transform.Translate(moveAmount, 0, 0);
+            directionAttack =  Vector2.right;
+
+        float moveAmount;
+        if(isSprinting)
+            moveAmount = faceDirection * (playerSpeed + (playerSpeed * unlockedTraits[1,1] * tier1SpeedBonus) + (playerSpeed * unlockedTraits[1,2] * tier2SpeedBonus));
+        else
+            moveAmount = faceDirection * (playerSpeed + (playerSpeed * unlockedTraits[1,1] * tier1SpeedBonus));
+
+        // transform.Translate(moveAmount, 0, 0);
+        rig.velocity = new Vector2 (moveAmount, rig.velocity.y);
     }
 
     void interactOrAttack()
@@ -133,9 +148,6 @@ public class Player : MonoBehaviour
         }
         isAttacking= false;
     }
-
-
-
 
     void VelocityDecay()
     {
