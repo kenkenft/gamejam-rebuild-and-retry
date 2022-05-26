@@ -621,7 +621,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4620541862208267194, guid: ea2d7708dcf319c49bc1b5cc498dc6c9, type: 3}
       propertyPath: speedDecayMultiplier
-      value: 1
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 4620541862208267195, guid: ea2d7708dcf319c49bc1b5cc498dc6c9, type: 3}
       propertyPath: m_RootOrder

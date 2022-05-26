@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     private float chargeTimer = 0f;
     private bool canJumpAgain = false;
     private bool isSprinting = false;
+    private bool canDash = true;
     private bool isDashing = false;
     private bool isSprintRecharging = false;
 
@@ -73,10 +74,12 @@ public class Player : MonoBehaviour
 
         if((Input.GetKeyDown(KeyCode.LeftShift) && unlockedTraits[1,3] == 1))
             {
-                if((Time.time - lastTapTime) < tapSpeed)
+                if((Time.time - lastTapTime) < tapSpeed && canDash)
                 { 
                     isDashing = true;
+                    canDash = false;
                     Debug.Log("Engaging Dash");
+                    Invoke("EndDash", 0.3f);
                 }
                 else
                     Debug.Log("Dash Not Engaged");
@@ -154,7 +157,15 @@ public class Player : MonoBehaviour
     }
     void EndDash()
     {
+        Debug.Log("Dash End");
         isDashing = false;
+        Invoke("EndDashCooldown", 3f);
+    }
+
+    void EndDashCooldown()
+    {
+        canDash = true;
+        Debug.Log("Can Dash!");
     }
 
     void interactOrAttack()
