@@ -57,25 +57,36 @@ public class Player : MonoBehaviour
     {
         // Get out components
         rig = GetComponent<Rigidbody2D>();
-        if(unlockedTraits == null)
-        {
-            Debug.Log("Initialise traits");
-            traitLevel = new int[3] {0, 0, 0}; // Corresponds to [jump, speed, strength]. 0 is base level; 3 is max level
-            unlockedTraits = new int[3,4] { {1, 0, 0, 0}, {1, 0, 0, 0}, {1, 0, 0, 0}}; 
-        }
-        else
-        {
-            Debug.Log("Traits don't need initialising");
-        }
+        
     }
 
     void Start()
     {
+        if(GameControl.control.unlockedTraits == null)
+        {
+            Debug.Log("First time Initialise for GameControl variables");
+            traitLevel = new int[3] {0, 0, 0}; // Corresponds to [jump, speed, strength]. 0 is base level; 3 is max level
+            unlockedTraits = new int[3,4] { {1, 0, 0, 0}, {1, 0, 0, 0}, {1, 0, 0, 0}};
+            playerSpeedMax = playerSpeed; 
+
+            GameControl.control.traitLevel = traitLevel; // Corresponds to [jump, speed, strength]. 0 is base level; 3 is max level
+            GameControl.control.unlockedTraits = unlockedTraits;
+            GameControl.control.playerSpeedMax = playerSpeedMax; 
+        }
+        else
+        {
+            Debug.Log("GameControl variables don't need initialising");
+            Debug.Log("Loading traits from GameControl");
+            traitLevel = GameControl.control.traitLevel; // Corresponds to [jump, speed, strength]. 0 is base level; 3 is max level
+            unlockedTraits = GameControl.control.unlockedTraits;
+            playerSpeedMax = GameControl.control.playerSpeedMax;
+        }
+
         playerCollider = GetComponent<BoxCollider2D>(); // Get player collider width for use positioning the rays for the IsGrounded function 
         playerColliderWidth = playerCollider.size[0];
         playerColliderWidthOffset = playerColliderWidth + 0.1f;
         isNearInteractable = false;
-        playerSpeedMax = playerSpeed;
+        
         playerSpeedMaxTier2 = playerSpeed * (1 + tier1SpeedBonus + tier2SpeedBonus);
         playerSpeedMaxTier3 = playerSpeed * (1 + tier1SpeedBonus + tier2SpeedBonus + tier3SpeedBonus);
         doorManager = FindObjectOfType<DoorManager>();
@@ -297,10 +308,14 @@ public class Player : MonoBehaviour
         {
             traitLevel[trait] ++;       // Increment trait level by 1
             unlockedTraits[trait, tierNum] = 1;     // Set the trait to 1 i.e. player unlocked that trait.
+            GameControl.control.traitLevel = traitLevel;
+            GameControl.control.unlockedTraits = unlockedTraits;
+
             // Increase speed limit for player if speed has been upgraded
             if(tierNum == 1)
                 {
                     playerSpeedMax = playerSpeed * (1 + tier1SpeedBonus);
+                    GameControl.control.playerSpeedMax = playerSpeedMax;
                 }
         }
 

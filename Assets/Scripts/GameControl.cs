@@ -10,6 +10,7 @@ public class GameControl : MonoBehaviour
 
     public int[] traitLevel; // Corresponds to [jump, speed, strength]. 0 is base level; 3 is max level
     public int[,] unlockedTraits; 
+    public float playerSpeedMax;
 
     // Start is called before the first frame update
     void Awake()
