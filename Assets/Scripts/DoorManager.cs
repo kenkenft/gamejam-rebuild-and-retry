@@ -17,7 +17,7 @@ public class DoorManager : MonoBehaviour
     public void SetSpawnDoor(Door door)
     {
         doorToSpawnAt = door.doorID;    // Gets door ID to use in determining which door to spawn player in the next room
-        PlayerPrefs.SetInt("PortalToSpawnAt", door.doorID);     // Store door ID in PlayerPrefs to carry between scenes
+        PlayerPrefs.SetInt("DoorToSpawnAt", door.doorID);     // Store door ID in PlayerPrefs to carry between scenes
         SceneManager.LoadScene(door.scene);     // Load target scene i.e. go to next room
     }
 
