@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] float tier1SpeedBonus = 0.75f;     // Speed bonus from Tier-1 Speed upgrade
     [SerializeField] float tier2SpeedBonus = 1.50f;     // Speed bonus from Tier-2 Speed sprint upgrade
     [SerializeField] float tier3SpeedBonus = 3.00f;     // Speed bonus from Tier-3 Speed dash upgrade
-    [SerializeField] float speedDecayMultiplier = 0.90f;
+    [SerializeField] float speedDecayMultiplier = 0.95f;
     [SerializeField] float playerJump = 5.0f;       // Player's base jump height
     [SerializeField] float tier1JumpBonus = 2.0f;
     [SerializeField] float jumpVelDecayHigh = 1.4f;       // Player upward velocity decay multiplier for "high" jumps
@@ -31,7 +31,6 @@ public class Player : MonoBehaviour
     public int baseDamage = 4;
     public float chargeTimeThresh = 3f;
     private float chargeTimer = 0f;
-    private bool isAttacking;
     private bool canJumpAgain = false;
     private bool isSprinting = false;
     private bool isDashing = false;
@@ -61,7 +60,6 @@ public class Player : MonoBehaviour
         playerCollider = GetComponent<BoxCollider2D>(); // Get player collider width for use positioning the rays for the IsGrounded function 
         playerColliderWidth = playerCollider.size[0];
         playerColliderWidthOffset = playerColliderWidth + 0.1f;
-        isAttacking = false;
         isNearInteractable = false;
         playerSpeedMax = playerSpeed;
         playerSpeedMaxTier2 = playerSpeed * (1 + tier1SpeedBonus + tier2SpeedBonus);
@@ -110,50 +108,39 @@ public class Player : MonoBehaviour
         // Otherwise, keep facing in the current direction
         Debug.Log(faceDirection);
         float moveAmount;
-        // Vector2 moveAmount;
-        // if(!isDashing || isSprintRecharging)
-        // {
-            if(faceDirection == 0)
+        if(faceDirection == 0)
+        {
+            float x = rig.velocity.x;
+            Vector3 mask = rig.velocity;    
+            mask.x = x;
+            rig.velocity = mask;
+        }
+        else if(isSprinting)
+        {
+            if(!isDashing || isSprintRecharging)
             {
-                float x = rig.velocity.x;
-                Vector3 mask = rig.velocity;    
-                mask.x = x;
-                rig.velocity = mask;
-            }
-            else if(isSprinting)
-            {
-                if(!isDashing || isSprintRecharging)
-                {
-                    moveAmount = faceDirection * (playerSpeed + playerSpeed * ((unlockedTraits[1,1] * tier1SpeedBonus) + (unlockedTraits[1,2] * tier2SpeedBonus)));
-                    ClampSpeed(moveAmount, playerSpeedMaxTier2);
-                }
-                else
-                {
-                    moveAmount = faceDirection * (playerSpeed + playerSpeed * ((unlockedTraits[1,1] * tier1SpeedBonus) + (unlockedTraits[1,2] * tier2SpeedBonus) + (unlockedTraits[1,3] * tier3SpeedBonus)));
-                    ClampSpeed(moveAmount, playerSpeedMaxTier3);
-                }
+                moveAmount = faceDirection * (playerSpeed + playerSpeed * ((unlockedTraits[1,1] * tier1SpeedBonus) + (unlockedTraits[1,2] * tier2SpeedBonus)));
+                ClampSpeed(moveAmount, playerSpeedMaxTier2);
             }
             else
             {
-                if(!isDashing || isSprintRecharging)
-                {
-                    moveAmount = faceDirection * (playerSpeed + (playerSpeed * unlockedTraits[1,1] * tier1SpeedBonus));
-                    ClampSpeed(moveAmount, playerSpeedMax);
-                }
-                else
-                {
-                    moveAmount = faceDirection * (playerSpeed + playerSpeed * ((unlockedTraits[1,1] * tier1SpeedBonus) + (unlockedTraits[1,2] * tier2SpeedBonus) + (unlockedTraits[1,3] * tier3SpeedBonus)));
-                    ClampSpeed(moveAmount, playerSpeedMaxTier3);
-                }
+                moveAmount = faceDirection * (playerSpeed + playerSpeed * ((unlockedTraits[1,1] * tier1SpeedBonus) + (unlockedTraits[1,2] * tier2SpeedBonus) + (unlockedTraits[1,3] * tier3SpeedBonus)));
+                ClampSpeed(moveAmount, playerSpeedMaxTier3);
             }
-            // transform.Translate(moveAmount, 0, 0);
-            // rig.velocity = new Vector2 (moveAmount, rig.velocity.y);
-        // }
-        // else
-        // {
-        //     moveAmount = faceDirection * (playerSpeed + playerSpeed * ((unlockedTraits[1,1] * tier1SpeedBonus) + (unlockedTraits[1,2] * tier2SpeedBonus) + (unlockedTraits[1,3] * tier3SpeedBonus)));
-        //     ClampSpeed(moveAmount, playerSpeedMaxTier3);
-        // }
+        }
+        else
+        {
+            if(!isDashing || isSprintRecharging)
+            {
+                moveAmount = faceDirection * (playerSpeed + (playerSpeed * unlockedTraits[1,1] * tier1SpeedBonus));
+                ClampSpeed(moveAmount, playerSpeedMax);
+            }
+            else
+            {
+                moveAmount = faceDirection * (playerSpeed + playerSpeed * ((unlockedTraits[1,1] * tier1SpeedBonus) + (unlockedTraits[1,2] * tier2SpeedBonus) + (unlockedTraits[1,3] * tier3SpeedBonus)));
+                ClampSpeed(moveAmount, playerSpeedMaxTier3);
+            }
+        }
     }
 
     void ClampSpeed(float moveAmount, float speedLimit)
@@ -186,7 +173,6 @@ public class Player : MonoBehaviour
             }
         else
             {
-                // (!isAttacking)
                 int damage;
                 damage = baseDamage * (unlockedTraits[2,0] + unlockedTraits[2,1] + unlockedTraits[2,2]);
 
@@ -243,8 +229,6 @@ public class Player : MonoBehaviour
 
         if(rig.velocity.y < 0)              // Reduces floatiness of jumps
             rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayHigh * jumpTierFallReduction * Time.deltaTime;    
-        // else if(canJumpAgain && !Input.GetButton("Jump"))
-        //     rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayHigh * jumpTierFallReduction * Time.deltaTime;           // Start increasing downward velocity once peak of jump is reached
         else if(rig.velocity.y > 0 && !Input.GetButton("Jump"))
             rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayLow * jumpTierFallReduction * Time.deltaTime;                // Start increasing downward velocity once player lets go of jump input
         
@@ -254,17 +238,15 @@ public class Player : MonoBehaviour
     {
         float jump = playerJump + (playerJump * unlockedTraits[0,1] * tier1JumpBonus);    // Calculate jump power. Player jumps higher if Tier 1 jump is unlocked
         // Debug.Log("JumpPower: " + jump);
-        // Vector2 mask = new Vector2(rig.velocity.x, jump);
+
         if(IsGrounded())    // Jump whilst on ground
         {
             rig.velocity = Vector2.up * jump; 
-            // rig.AddForce(mask, ForceMode2D.Impulse);
             canJumpAgain = true; 
         }
         else if(canJumpAgain && unlockedTraits[0,2] == 1)    // Jump a second time if Tier 2 jump unlocked
         {
             rig.velocity = Vector2.up * jump;
-            // rig.AddForce(mask, ForceMode2D.Impulse);
             canJumpAgain = false;
         }
 
@@ -308,12 +290,6 @@ public class Player : MonoBehaviour
     void OnTriggerExit2D(Collider2D col)
     {
         isNearInteractable = false;
-    }
-
-    void OnCollisionEnter2D()
-    {
-        // canJumpAgain = true;        // Reset player double jump on contact with ground
-        Debug.Log("Collision detected");
     }
     
 }
