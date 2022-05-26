@@ -5,11 +5,13 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     private string tagType;
+    private DoorManager doorManager;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         tagType = gameObject.tag;
+        doorManager = FindObjectOfType<DoorManager>();
     }
 
     public void WhichInteraction()
@@ -35,6 +37,12 @@ public class Interactable : MonoBehaviour
     private void OpenDoor()
     {
         Debug.Log("I'm opening a door");
+        Door targetDoor = gameObject.GetComponent<Door>();
+        //Method to load next scene i.e. go to next room
+        doorManager.SetSpawnDoor(targetDoor);   // Call method that saves information into PlayerPrefs and goes to next scene
+        //Method to store which door the player entered
+        //Method to store player stats
+
     }
 
     private void PullSwitch()

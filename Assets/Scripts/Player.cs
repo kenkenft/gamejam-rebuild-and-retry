@@ -49,6 +49,7 @@ public class Player : MonoBehaviour
     public LayerMask enemyLayerMask;
 
     private Rigidbody2D rig;
+    private DoorManager doorManager;
 
     void Awake ()
     {
@@ -65,6 +66,8 @@ public class Player : MonoBehaviour
         playerSpeedMax = playerSpeed;
         playerSpeedMaxTier2 = playerSpeed * (1 + tier1SpeedBonus + tier2SpeedBonus);
         playerSpeedMaxTier3 = playerSpeed * (1 + tier1SpeedBonus + tier2SpeedBonus + tier3SpeedBonus);
+        doorManager = FindObjectOfType<DoorManager>();
+        transform.position = doorManager.GetSpawnPosition();
     }
 
     void Update()
@@ -109,7 +112,7 @@ public class Player : MonoBehaviour
         else if(faceDirection > 0f)
             directionAttack =  Vector2.right;
         // Otherwise, keep facing in the current direction
-        Debug.Log(faceDirection);
+
         float moveAmount;
         if(faceDirection == 0)
         {
