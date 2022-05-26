@@ -6,14 +6,15 @@ public class Player : MonoBehaviour
 {
     [SerializeField] int[] traitLevel = {0, 0, 0}; // Corresponds to [jump, speed, strength]. 0 is base level; 3 is max level
     [SerializeField] int[,] unlockedTraits = new int[3,4] { {1, 0, 0, 0}, {1, 0, 0, 0}, {1, 0, 0, 0}}; 
-    [SerializeField] float playerSpeed = 5f;     // Player's base speed
+    [SerializeField] float playerSpeed = 3f;     // Player's base speed
     [SerializeField] float tier1SpeedBonus = 0.75f;     // Speed bonus from Tier-1 Speed upgrade
     [SerializeField] float tier2SpeedBonus = 1.50f;     // Speed bonus from Tier-2 Speed sprint upgrade
     [SerializeField] float tier3SpeedBonus = 3.00f;     // Speed bonus from Tier-3 Speed dash upgrade
+    [SerializeField] float speedDecayMultiplier = 0.90f;
     [SerializeField] float playerJump = 5.0f;       // Player's base jump height
     [SerializeField] float tier1JumpBonus = 2.0f;
-    [SerializeField] float jumpVelDecayHigh = 3.0f;       // Player upward velocity decay multiplier for "high" jumps
-    [SerializeField] float jumpVelDecayLow = 5.0f;        // Player upward velocity decay multiplier for "lowJumpMultiplier" jumps
+    [SerializeField] float jumpVelDecayHigh = 1.4f;       // Player upward velocity decay multiplier for "high" jumps
+    [SerializeField] float jumpVelDecayLow = 1.7f;        // Player upward velocity decay multiplier for "lowJumpMultiplier" jumps
     [SerializeField] float jumpHoverReduction = 0.0001f;
     private float jumpTierFallReduction;
 
@@ -101,19 +102,25 @@ public class Player : MonoBehaviour
 
     void Move()
     {
-        faceDirection = Input.GetAxis("Horizontal");
+        faceDirection = Input.GetAxisRaw("Horizontal");
         if(faceDirection < 0f)
             directionAttack =  Vector2.left;        
         else if(faceDirection > 0f)
             directionAttack =  Vector2.right;
         // Otherwise, keep facing in the current direction
-
+        Debug.Log(faceDirection);
         float moveAmount;
         // Vector2 moveAmount;
         // if(!isDashing || isSprintRecharging)
         // {
-            
-            if(isSprinting)
+            if(faceDirection == 0)
+            {
+                float x = rig.velocity.x;
+                Vector3 mask = rig.velocity;    
+                mask.x = x;
+                rig.velocity = mask;
+            }
+            else if(isSprinting)
             {
                 if(!isDashing || isSprintRecharging)
                 {
@@ -204,7 +211,7 @@ public class Player : MonoBehaviour
 
     void Attack(int damage)
     {
-        isAttacking = true;
+
         RaycastHit2D hits = Physics2D.Raycast(transform.position, directionAttack, attackRange, enemyLayerMask);
         Collider2D hitsCollider = hits.collider;
         if(hitsCollider !=null)
@@ -215,7 +222,6 @@ public class Player : MonoBehaviour
             else
                 hitsCollider.GetComponent<BreakableBarricade>()?.CheckStrongEnough(damage); // Assumes that there are only enemies and barricades to hit in this game
         }
-        isAttacking= false;
     }
 
     void VelocityDecay()
@@ -225,6 +231,15 @@ public class Player : MonoBehaviour
             jumpTierFallReduction = jumpHoverReduction;
         else
             jumpTierFallReduction = 1f;         // No reduction from Tier-3 hover
+
+        float x = rig.velocity.x;
+        Vector3 mask = rig.velocity;
+
+        if( x !=0.0f )              // Gradually reduce x-axis velocity (Unless being boosted by ramps)
+        {
+            mask.x *= speedDecayMultiplier;
+            rig.velocity = mask;
+        }
 
         if(rig.velocity.y < 0)              // Reduces floatiness of jumps
             rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayHigh * jumpTierFallReduction * Time.deltaTime;    
