@@ -28,6 +28,10 @@ public class Interactable : MonoBehaviour
                 PullSwitch();
                 break;
 
+            case "Treadmill":
+                GetOnTreadmill();
+                break;
+
             default:
                 Debug.Log("Default Case trigged");
                 break;
@@ -50,5 +54,10 @@ public class Interactable : MonoBehaviour
         // Works in tandem with TimedGate class. Assumes the switch is a child of the object with TimedGate
         TimedGate targetGate = gameObject.GetComponentInParent<TimedGate>();
         targetGate.OpenTheGate(); 
+    }
+
+    private void GetOnTreadmill()
+    {
+        Debug.Log("I am on a treadmill");
     }
 }

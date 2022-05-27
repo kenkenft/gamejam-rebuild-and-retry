@@ -18,12 +18,6 @@ public class TimedGate : MonoBehaviour
         isSwitchPulled = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OpenTheGate()
     {
         // Prevent switch from being pulled multiple times

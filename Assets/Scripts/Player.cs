@@ -64,7 +64,7 @@ public class Player : MonoBehaviour
     {
         if(GameControl.control.unlockedTraits == null)
         {
-            Debug.Log("First time Initialise for GameControl variables");
+            // Debug.Log("First time Initialise for GameControl variables");
             traitLevel = new int[3] {0, 0, 0}; // Corresponds to [jump, speed, strength]. 0 is base level; 3 is max level
             unlockedTraits = new int[3,4] { {1, 0, 0, 0}, {1, 0, 0, 0}, {1, 0, 0, 0}};
             playerSpeedMax = playerSpeed; 
@@ -75,8 +75,8 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.Log("GameControl variables don't need initialising");
-            Debug.Log("Loading traits from GameControl");
+            // Debug.Log("GameControl variables don't need initialising");
+            // Debug.Log("Loading traits from GameControl");
             traitLevel = GameControl.control.traitLevel; // Corresponds to [jump, speed, strength]. 0 is base level; 3 is max level
             unlockedTraits = GameControl.control.unlockedTraits;
             playerSpeedMax = GameControl.control.playerSpeedMax;

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class TreadmillGate : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private BoxCollider2D gateCollider;
+    private SpriteRenderer gateSprite;
+    private bool isOpen;
     // Start is called before the first frame update
     void Start()
     {
