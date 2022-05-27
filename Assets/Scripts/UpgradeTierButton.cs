@@ -10,11 +10,17 @@ public class UpgradeTierButton : MonoBehaviour
     [SerializeField] int traitTier;     // Tier level to be unlocked. 0 = tier 0, 1 = tier 1, 2 = tier 2, 3 = tier 3, 
     
     [SerializeField] Button nextTier;
-    [SerializeField] bool isActiveOngameStart;
+    [SerializeField] bool isActiveOnGameStart;
     
     void Start()
     {
-        GetComponent<Button>().interactable = isActiveOngameStart;
+        if(GameControl.control.unlockedTraits[traitNum, traitTier] == 1)
+        {
+            GetComponent<Button>().interactable = false;
+            GetComponent<Image>().color = new Color(0.3f, 0.9f, 0.3f, 0.7f); // Change colour of newly disabled button
+        }
+        else
+            GetComponent<Button>().interactable = true;
     }
     
 
