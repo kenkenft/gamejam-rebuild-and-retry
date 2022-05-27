@@ -15,7 +15,7 @@ public class UpgradeMenu : MonoBehaviour
 
     void Start()
     {
-        playerScript = player.GetComponent<Player>();
+        playerScript = FindObjectOfType<Player>();
     }
     void Update()
     {

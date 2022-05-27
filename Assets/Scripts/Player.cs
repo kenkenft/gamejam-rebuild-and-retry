@@ -13,8 +13,8 @@ public class Player : MonoBehaviour
     [SerializeField] float tier2SpeedBonus = 1.50f;     // Speed bonus from Tier-2 Speed sprint upgrade
     [SerializeField] float tier3SpeedBonus = 3.00f;     // Speed bonus from Tier-3 Speed dash upgrade
     [SerializeField] float speedDecayMultiplier = 0.95f;
-    [SerializeField] float playerJump = 5.0f;       // Player's base jump height
-    [SerializeField] float tier1JumpBonus = 2.0f;
+    [SerializeField] float playerJump = 6.0f;       // Player's base jump height
+    [SerializeField] float tier1JumpBonus = 0.5f;   // Increase player jump height by 50% percent
     [SerializeField] float jumpVelDecayHigh = 1.4f;       // Player upward velocity decay multiplier for "high" jumps
     [SerializeField] float jumpVelDecayLow = 1.7f;        // Player upward velocity decay multiplier for "lowJumpMultiplier" jumps
     [SerializeField] float jumpHoverReduction = 0.0001f;
@@ -273,7 +273,8 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        float jump = playerJump + (playerJump * unlockedTraits[0,1] * tier1JumpBonus);    // Calculate jump power. Player jumps higher if Tier 1 jump is unlocked
+        // float jump = playerJump + (playerJump * unlockedTraits[0,1] * tier1JumpBonus);    // Calculate jump power. Player jumps higher if Tier 1 jump is unlocked
+        float jump = playerJump * (1 + (1 * unlockedTraits[0,1] * tier1JumpBonus));    // Calculate jump power. Player jumps higher if Tier 1 jump is unlocked
         // Debug.Log("JumpPower: " + jump);
 
         if(IsGrounded())    // Jump whilst on ground

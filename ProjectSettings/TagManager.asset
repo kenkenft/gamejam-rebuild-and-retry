@@ -12,6 +12,7 @@ TagManager:
   - str-tier-2
   - str-tier-3
   - Enemy
+  - Treadmill
   layers:
   - Default
   - TransparentFX

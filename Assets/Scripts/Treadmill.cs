@@ -29,6 +29,8 @@ public class Treadmill : MonoBehaviour
     {
         onTreadmill = true;
         Debug.Log("onTreadmill: " + onTreadmill);
+        // Set player position to locked on playerTreadmillPos
+        // Lock player position until interact occurs
     }
 
     private void GetOffTreadmill()
