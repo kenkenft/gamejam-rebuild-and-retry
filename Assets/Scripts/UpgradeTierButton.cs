@@ -14,13 +14,20 @@ public class UpgradeTierButton : MonoBehaviour
     
     void Start()
     {
-        if(GameControl.control.unlockedTraits[traitNum, traitTier] == 1)
+        // Button is enabled if current tier has yet to be unlocked AND previous tier has been unlocked
+        if(GameControl.control.unlockedTraits[traitNum, traitTier] == 0  && GameControl.control.unlockedTraits[traitNum, traitTier-1] == 1)
         {
-            GetComponent<Button>().interactable = false;
-            GetComponent<Image>().color = new Color(0.3f, 0.9f, 0.3f, 0.7f); // Change colour of newly disabled button
+            GetComponent<Button>().interactable = true;
         }
         else
-            GetComponent<Button>().interactable = true;
+        {
+            // Otherwise, the button is locked
+            GetComponent<Button>().interactable = false;
+
+            // Only colour a disabled button if the corresponding tier has been acquired 
+            if(GameControl.control.unlockedTraits[traitNum, traitTier-1] == 1 && GameControl.control.unlockedTraits[traitNum, traitTier-1] == 1)
+                GetComponent<Image>().color = new Color(0.3f, 0.9f, 0.3f, 0.7f); // Change colour of newly disabled button
+        }
     }
     
 
