@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c377faa2ce5a704a8567cc9777d6bad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorID: 1
+  doorID: 0
   scene: 0
   doorEntrance: {fileID: 0}
   spawnPosition: {x: 0, y: 0, z: 0}
