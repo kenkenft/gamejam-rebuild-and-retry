@@ -32,8 +32,6 @@ public class UpgradeMenu : MonoBehaviour
         }
     }
 
-    // TODO method that locks tiers of skills unless previous tier is unlocked
-
     public void Resume()
     {
         UpgradeMenuUI.SetActive(false);
@@ -53,13 +51,6 @@ public class UpgradeMenu : MonoBehaviour
         Debug.Log("Menu Loaded");
     }
 
-    // public void setTier1Jump()
-    // {
-    //     playerScript.setTier(0,1);
-    //     Debug.Log("Tier 1 Jump : Unlocked!");
-    // }
-
-     
     // Set UpgradeTierButton that called this function, and then get the button's target tier and target level
     public void SetTargetButton(int traitNum, int traitTier)
     {

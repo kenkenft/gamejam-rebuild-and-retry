@@ -13,6 +13,7 @@ TagManager:
   - str-tier-3
   - Enemy
   - Treadmill
+  - ScenarioExplanation
   layers:
   - Default
   - TransparentFX

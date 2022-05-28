@@ -48,6 +48,7 @@
      <Compile Include="Assets\Scripts\TimedGate.cs" />
      <Compile Include="Assets\Scripts\UpgradeMenu.cs" />
      <Compile Include="Assets\Scripts\BreakableBarricade.cs" />
+     <Compile Include="Assets\Scripts\LevelIntroScreen.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
@@ -332,6 +333,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
         <HintPath>D:\Unity Projects\gamejam-rebuild-and-retry\Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="clipper_library">
+        <HintPath>D:\Unity Projects\gamejam-rebuild-and-retry\Library\PackageCache\com.unity.cinemachine@2.8.6\Runtime\ThirdParty\clipper_library.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.2f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>
@@ -876,6 +880,14 @@
     <ProjectReference Include="Unity.VisualScripting.State.csproj">
       <Project>{7063e48a-51d6-dcac-14da-e29a2f378639}</Project>
       <Name>Unity.VisualScripting.State</Name>
+    </ProjectReference>
+    <ProjectReference Include="com.unity.cinemachine.editor.csproj">
+      <Project>{b3b9ccf5-9800-c49d-a3d3-6a486c6c6630}</Project>
+      <Name>com.unity.cinemachine.editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Cinemachine.csproj">
+      <Project>{2b8e5d18-78e7-76fe-a4e6-d9a7194f47c5}</Project>
+      <Name>Cinemachine</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
