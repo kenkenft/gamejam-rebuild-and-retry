@@ -1608,6 +1608,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 11.87
       objectReference: {fileID: 0}
+    - target: {fileID: 703247698, guid: 39ffc198fe329f84d82dffd5cdd107ba, type: 3}
+      propertyPath: scene
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3476742491248824916, guid: 39ffc198fe329f84d82dffd5cdd107ba, type: 3}
       propertyPath: m_Name
       value: Door
@@ -1866,6 +1870,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1648378160}
     m_Modifications:
+    - target: {fileID: 1459116628463561739, guid: 65b4ba3445f27e34895de43f45326985, type: 3}
+      propertyPath: scene
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1961225876483120625, guid: 65b4ba3445f27e34895de43f45326985, type: 3}
       propertyPath: m_RootOrder
       value: 1
