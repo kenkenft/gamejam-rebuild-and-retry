@@ -7,7 +7,7 @@ public class BreakableBarricade : MonoBehaviour
     private string tagType;
     private int barricadeHP; 
     private int thresStrength;      // Minimum amount of damage required to actually start taking health off barricadeHP  
-
+    public bool strCheck = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,25 +18,29 @@ public class BreakableBarricade : MonoBehaviour
     }
 
     public void CheckStrongEnough(int damage)
-    {
-        if(damage > thresStrength)
+    {   
+        if(strCheck)
         {
+            if(strCheck && damage > thresStrength)
+            {
             // Debug.Log("You are strong enough");
-            TakeDamage(damage);
+                TakeDamage(damage);
+            }
+            else
+            {
+                // TODO feedback to show no damage taken
+            }
         }
         else
         {
-            // Debug.Log("You are too WEAK");
-            // ToDo audio feedback for ineffective attack
+            TakeDamage(damage);
         }
-        Debug.Log(barricadeHP);
+        // Debug.Log(barricadeHP);
     }
 
     private void TakeDamage(int damage)
     {
         barricadeHP -= damage;
-        
-
         // Destroy barricade when hp drops to or below 0
         if(barricadeHP <= 0)
         {
