@@ -178,7 +178,7 @@ public class Player : MonoBehaviour
             rig.AddForce(mask, ForceMode2D.Impulse);
             mask = rig.velocity;
             mask.x = Mathf.Clamp( rig.velocity.x, -speedLimit, speedLimit);             // Limit player's velocity
-            // mask.y = Mathf.Clamp( rig.velocity.y, -10f, 10f);
+            mask.y = Mathf.Clamp( rig.velocity.y, -20f, 40f);
             rig.velocity = mask;
     }
     void EndDash()
