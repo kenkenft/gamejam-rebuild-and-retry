@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     
-    public Player player;
+    public Player playerScript;
     public int health;
     private bool isDead;
     
@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+            playerScript = FindObjectOfType<Player>();
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
             // agent.isStopped = true;
             // anim.SetTrigger("Die");
             GetComponent<BoxCollider2D>().enabled = false;             // Remove collider on death
-            GetComponent<Rigidbody2D>().isKinematic = true;             // Remove collider on death
+            // GetComponent<Rigidbody2D>().isKinematic = true;             // Remove collider on death
         }
     }
 }

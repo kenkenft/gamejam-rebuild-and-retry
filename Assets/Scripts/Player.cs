@@ -218,7 +218,7 @@ public class Player : MonoBehaviour
 
                 if(Input.GetKeyUp(KeyCode.E) && chargeTimer >= chargeTimeThresh && unlockedTraits[2,3] == 1)
                 {
-                    damage += damage;       // Double the damage
+                    damage *= 3;       // Triple the damage
                     Attack(damage);
                     Debug.Log("Charge Attack!");
                     chargeTimer = 0f;

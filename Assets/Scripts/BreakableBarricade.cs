@@ -69,7 +69,7 @@ public class BreakableBarricade : MonoBehaviour
                 break;
 
             case "str-tier-3":
-                barricadeHP = 16;
+                barricadeHP = 30;
                 thresStrength = 15;
                 break;
 
