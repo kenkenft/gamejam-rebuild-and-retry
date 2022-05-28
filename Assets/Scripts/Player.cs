@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] float tier2SpeedBonus = 1.50f;     // Speed bonus from Tier-2 Speed sprint upgrade
     [SerializeField] float tier3SpeedBonus = 3.00f;     // Speed bonus from Tier-3 Speed dash upgrade
     [SerializeField] float speedDecayMultiplier = 0.95f;
-    [SerializeField] float playerJump = 6.0f;       // Player's base jump height
+    [SerializeField] float playerJump = 8.0f;       // Player's base jump height
     [SerializeField] float tier1JumpBonus = 0.5f;   // Increase player jump height by 50% percent
     [SerializeField] float jumpVelDecayHigh = 1.4f;       // Player upward velocity decay multiplier for "high" jumps
     [SerializeField] float jumpVelDecayLow = 1.7f;        // Player upward velocity decay multiplier for "lowJumpMultiplier" jumps
@@ -178,7 +178,7 @@ public class Player : MonoBehaviour
             rig.AddForce(mask, ForceMode2D.Impulse);
             mask = rig.velocity;
             mask.x = Mathf.Clamp( rig.velocity.x, -speedLimit, speedLimit);             // Limit player's velocity
-            mask.y = Mathf.Clamp( rig.velocity.y, -speedLimit, speedLimit);
+            // mask.y = Mathf.Clamp( rig.velocity.y, -10f, 10f);
             rig.velocity = mask;
     }
     void EndDash()
@@ -266,7 +266,7 @@ public class Player : MonoBehaviour
 
         if(rig.velocity.y < 0)              // Reduces floatiness of jumps
             rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayHigh * jumpTierFallReduction * Time.deltaTime;    
-        else if(rig.velocity.y > 0 && !Input.GetButton("Jump"))
+        else if(rig.velocity.y > 0 && !Input.GetButton("Jump"))     // For low jumps
             rig.velocity += Vector2.up * Physics2D.gravity.y * jumpVelDecayLow * jumpTierFallReduction * Time.deltaTime;                // Start increasing downward velocity once player lets go of jump input
         
     }//// End of VelocityDecay()
@@ -279,7 +279,7 @@ public class Player : MonoBehaviour
 
         if(IsGrounded())    // Jump whilst on ground
         {
-            rig.velocity = Vector2.up * jump; 
+            rig.velocity = Vector2.up * jump;
             canJumpAgain = true; 
         }
         else if(canJumpAgain && unlockedTraits[0,2] == 1)    // Jump a second time if Tier 2 jump unlocked
