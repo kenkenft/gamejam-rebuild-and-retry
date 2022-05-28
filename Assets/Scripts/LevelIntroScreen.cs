@@ -21,6 +21,7 @@ public class LevelIntroScreen : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.E) && showUpgradeMenu)
         {
+            showUpgradeMenu = false;
             GameControl.control.availablePoints = upgradePoints;
             Resume();
             ShowUpgradeMenu();

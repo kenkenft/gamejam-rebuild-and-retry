@@ -33,13 +33,17 @@ public class UpgradeTierButton : MonoBehaviour
     // Method that sends the button's target trait and level to be unlocked 
     public void SetButtonInUpgradeMenu()
     {
-        UpgradeMenuUI.GetComponent<UpgradeMenu>()?.SetTargetButton(traitNum, traitTier); // Call method in UpgradeMenu class that will call a method in Player class
+        if(GameControl.control.availablePoints > 0)
+        {
+            GameControl.control.availablePoints--;
+            UpgradeMenuUI.GetComponent<UpgradeMenu>()?.SetTargetButton(traitNum, traitTier); // Call method in UpgradeMenu class that will call a method in Player class
         
-        GetComponent<Button>().interactable = false;  // Disable interactable on current button
-        GetComponent<Image>().color = new Color(0.3f, 0.9f, 0.3f, 0.7f); // Change colour of newly disabled button
+            GetComponent<Button>().interactable = false;  // Disable interactable on current button
+            GetComponent<Image>().color = new Color(0.3f, 0.9f, 0.3f, 0.7f); // Change colour of newly disabled button
 
-        // Unlock next tier upgrade button
-        if(traitTier < 3 && nextTier != null)
-            nextTier.interactable = true;
+            // Unlock next tier upgrade button
+            if(traitTier < 3 && nextTier != null)
+                nextTier.interactable = true;
+        }
     }
 }
