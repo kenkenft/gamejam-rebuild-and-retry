@@ -8,8 +8,8 @@ public class Door : MonoBehaviour
     public int scene;
     [SerializeField] GameObject doorEntrance;
     public Vector3 spawnPosition;
-    void Awake()
     
+    void Awake()
     {
         spawnPosition = transform.GetChild(0).position;
     }
