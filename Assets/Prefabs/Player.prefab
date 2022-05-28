@@ -129,7 +129,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: e4a02347ad5ba1b4ea3eaddc3916f66f, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -151,6 +151,7 @@ MonoBehaviour:
   tier1SpeedBonus: 0.75
   tier2SpeedBonus: 1.5
   tier3SpeedBonus: 3
+  speedDecayMultiplier: 0.95
   playerJump: 5
   tier1JumpBonus: 2
   jumpVelDecayHigh: 3
