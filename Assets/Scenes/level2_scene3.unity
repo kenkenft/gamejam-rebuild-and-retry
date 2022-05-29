@@ -6878,12 +6878,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7907895032845198847, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_text
-      value: Your arrive on time, and the date goes smoothly. It was definitely worth
+      value: You arrive on time, and the date goes smoothly. It was definitely worth
         dying for.
       objectReference: {fileID: 0}
     - target: {fileID: 7907895032845198847, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_fontSize
-      value: 28.7
+      value: 28.95
       objectReference: {fileID: 0}
     - target: {fileID: 7907895032845198847, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_margin.w
