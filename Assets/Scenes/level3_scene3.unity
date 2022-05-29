@@ -6103,11 +6103,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7907895031237324307, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: upgradePoints
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7907895031237324307, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: showUpgradeMenu
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7907895031237324318, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_Name
