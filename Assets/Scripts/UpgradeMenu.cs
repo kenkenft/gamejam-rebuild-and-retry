@@ -25,6 +25,7 @@ public class UpgradeMenu : MonoBehaviour
             Debug.Log("E Key pressed");
             if(GameIsPaused && GameControl.control.availablePoints <=0)
             {
+                Debug.Log("E Key pressed");
                 Debug.Log("IF check passed");
                 Debug.Log("GameIsPaused: " + GameIsPaused + " - availablePoints: " + GameControl.control.availablePoints);
                 Resume();

@@ -324,9 +324,16 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        isNearInteractable = true;
+        // isNearInteractable = true;
         if(col.gameObject.layer == 8)       // Assumes Layer 8 is "Interact" layer
+        {
+            isNearInteractable = true;
             objectInteractable = col.gameObject;    // For calling methods within interactable object
+        }
+        if(col.gameObject.CompareTag("Door") == true)
+        {
+            Debug.Log("I've Jumped off the building");
+        }
     }
 
     void OnTriggerExit2D(Collider2D col)
