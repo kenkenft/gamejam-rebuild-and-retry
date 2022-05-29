@@ -159,7 +159,7 @@ MonoBehaviour:
   jumpHoverReduction: 0.0001
   attackRange: 2
   baseDamage: 4
-  chargeTimeThresh: 3
+  chargeTimeThresh: 2
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64

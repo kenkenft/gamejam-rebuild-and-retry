@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
 
     public float attackRange = 2;
     public int baseDamage = 4;
-    public float chargeTimeThresh = 3f;
+    public float chargeTimeThresh = 2f;
     private float chargeTimer = 0f;
     private bool canJumpAgain = false;
     private bool isSprinting = false;
