@@ -50,8 +50,6 @@ public class TimedGate : MonoBehaviour
     private void CloseTheGate()
     {
         isSwitchPulled = false;
-        
-        isSwitchPulled = true;
             foreach(BoxCollider2D gateCollider in gateColliders)
             {
                 gateCollider.enabled = true;       // Let the player pass through

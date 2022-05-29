@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5523614771820629399}
   - component: {fileID: 5486750377754605522}
   - component: {fileID: 8613873192072650708}
-  - component: {fileID: 4854061677341498366}
   m_Layer: 8
   m_Name: Shutter
   m_TagString: Door
@@ -125,19 +124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d576aad851ce14eaf95a3c02c5b09d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4854061677341498366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5776221565529488150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aaa0f52bf553bc4a85c7898194c4d22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeOpen: 5
 --- !u!1 &6762140667750635650
 GameObject:
   m_ObjectHideFlags: 0
