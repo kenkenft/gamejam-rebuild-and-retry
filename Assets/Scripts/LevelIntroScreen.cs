@@ -10,6 +10,7 @@ public class LevelIntroScreen : MonoBehaviour
     // private bool GameIsPaused;
     public int upgradePoints; 
     public bool showUpgradeMenu;
+    public bool inUpgradeMenu;
     
     void Start()
     {
@@ -21,11 +22,12 @@ public class LevelIntroScreen : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.E) && showUpgradeMenu)
         {
             showUpgradeMenu = false;
+            inUpgradeMenu = true;
             GameControl.control.availablePoints = upgradePoints;
             Resume();
             ShowUpgradeMenu();
         }
-        else if(Input.GetKeyDown(KeyCode.E) && !showUpgradeMenu)
+        else if(Input.GetKeyDown(KeyCode.E) && !showUpgradeMenu && !inUpgradeMenu)
         {
             Resume();
         }
