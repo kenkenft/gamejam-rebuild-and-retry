@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class UpgradeMenu : MonoBehaviour
 {
-    public static UpgradeMenu upgradeMenu;
     public static bool GameIsPaused = false;
     public GameObject UpgradeMenuUI;
     public GameObject player;
@@ -13,19 +12,6 @@ public class UpgradeMenu : MonoBehaviour
     private Door[] sceneDoors;
 
     private Player playerScript;
-
-    void Awake()
-    {
-        if(upgradeMenu == null)
-        {
-            DontDestroyOnLoad(gameObject);
-            upgradeMenu = this;
-        }
-        else if (upgradeMenu != this)
-        {
-            Destroy(gameObject);
-        }
-    }
 
     void Start()
     {
@@ -43,18 +29,13 @@ public class UpgradeMenu : MonoBehaviour
                 Debug.Log("GameIsPaused: " + GameIsPaused + " - availablePoints: " + GameControl.control.availablePoints);
                 Resume();
             }
-            else
-            {
-                Debug.Log("GameIsPaused: " + GameIsPaused + " - availablePoints: " + GameControl.control.availablePoints);
-                Pause();
-            }
+            // else
+            // {
+            //     Debug.Log("GameIsPaused: " + GameIsPaused + " - availablePoints: " + GameControl.control.availablePoints);
+            //     Pause();
+            // }
         }
-        // else if( GameControl.control.availablePoints <=0)
-        // {
-        //     // Invoke("Resume", 2.0f);
-            
-        //     Resume();
-        // }
+
     }
 
     public void Resume()

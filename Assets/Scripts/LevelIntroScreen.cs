@@ -5,16 +5,15 @@ using UnityEngine;
 public class LevelIntroScreen : MonoBehaviour
 {
     public GameObject ScenarioExplainPanel;
+    public GameObject upgradeMenu;
     // public GameObject UpgradeMenuUI;
-    private Player playerScript;
-    private bool GameIsPaused;
+    // private bool GameIsPaused;
     public int upgradePoints; 
     public bool showUpgradeMenu;
     
     void Start()
     {
         Pause();
-        playerScript = FindObjectOfType<Player>();
         // ScenarioExplainPanel = GetComponent<LevelIntroScreen>();
     }
     void Update()
@@ -26,12 +25,9 @@ public class LevelIntroScreen : MonoBehaviour
             Resume();
             ShowUpgradeMenu();
         }
-        if(Input.GetKeyDown(KeyCode.E))
+        else if(Input.GetKeyDown(KeyCode.E) && !showUpgradeMenu)
         {
-            if(GameIsPaused)
-            {
-                Resume();
-            }
+            Resume();
         }
     }
 
@@ -39,19 +35,19 @@ public class LevelIntroScreen : MonoBehaviour
     {
         ScenarioExplainPanel.SetActive(false);
         Time.timeScale = 1f;
-        GameIsPaused = false;
+        // GameIsPaused = false;
     }
 
     void Pause()
     {
         ScenarioExplainPanel.SetActive(true);
         Time.timeScale = 0f;
-        GameIsPaused = true;
+        // GameIsPaused = true;
     }
 
     void ShowUpgradeMenu()
     {
         ScenarioExplainPanel.SetActive(false);
-        UpgradeMenu.upgradeMenu.Pause();
+        upgradeMenu.GetComponent<UpgradeMenu>()?.Pause();
     }
 }
