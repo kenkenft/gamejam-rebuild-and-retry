@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelIntroScreen : MonoBehaviour
 {
     public GameObject ScenarioExplainPanel;
-    public GameObject upgradeMenu;
+    public UpgradeMenu upgradeMenu;
     // public GameObject UpgradeMenuUI;
     // private bool GameIsPaused;
     public int upgradePoints; 
@@ -47,7 +47,9 @@ public class LevelIntroScreen : MonoBehaviour
 
     void ShowUpgradeMenu()
     {
+        upgradeMenu = FindObjectOfType<UpgradeMenu>();
         ScenarioExplainPanel.SetActive(false);
-        upgradeMenu.GetComponent<UpgradeMenu>()?.Pause();
+        // upgradeMenu.GetComponent<UpgradeMenu>()?.Pause();
+        upgradeMenu.Pause();
     }
 }
