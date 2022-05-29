@@ -23,11 +23,11 @@ public class TimedGate : MonoBehaviour
         // Prevent switch from being pulled multiple times
         if(!isSwitchPulled)
         {
-            Debug.Log("I'm pulling a switch");
+            // Debug.Log("I'm pulling a switch");
             isSwitchPulled = true;
             gateCollider.enabled = false;       // Let the player pass through
             gateSprite.color = Color.green;
-            Debug.Log("Door is Open!");
+            // Debug.Log("Door is Open!");
             Invoke("CloseTheGate", timeOpen);
         }
         else

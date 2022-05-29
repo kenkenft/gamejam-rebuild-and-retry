@@ -30,13 +30,39 @@ public class UpgradeMenu : MonoBehaviour
                 Debug.Log("GameIsPaused: " + GameIsPaused + " - availablePoints: " + GameControl.control.availablePoints);
                 Resume();
             }
+        }
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            Debug.Log("R Key pressed");
+            if(GameIsPaused)
+            {
+                Debug.Log("Debug Resume");
+                ResumeDebug();
+                GameIsPaused = false;
+            }
+            else
+            {   
+                Debug.Log("Debug Pause");
+                GameControl.control.availablePoints = 9;
+                Pause();
+            }
+        }
             // else
             // {
             //     Debug.Log("GameIsPaused: " + GameIsPaused + " - availablePoints: " + GameControl.control.availablePoints);
             //     Pause();
             // }
-        }
 
+    }
+
+    public void ResumeDebug()
+    {
+        UpgradeMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        GameIsPaused = false;
+        // sceneDoors = FindObjectsOfType<Door>(); 
+        // DoorManager doorManager = FindObjectOfType<DoorManager>();
+        // doorManager.SetSpawnDoor(sceneDoors[0]);
     }
 
     public void Resume()
