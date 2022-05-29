@@ -124,9 +124,17 @@ public class Player : MonoBehaviour
             }
         
         if(Input.GetKey(KeyCode.LeftShift) && unlockedTraits[1,2] == 1)
-            isSprinting = true;
+            {
+                isSprinting = true;
+                if(!isDashing)
+                    playerSprite.color = new Color(0.5f,0.46f,0.008f);
+            }
         else
-            isSprinting = false;
+            {
+                isSprinting = false;
+                if(!isDashing)
+                    playerSprite.color = playerOriginalColour;
+            }
 
         if(Input.GetKeyDown(KeyCode.Space))
             Jump();
