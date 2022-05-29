@@ -13,6 +13,8 @@ public class UpgradeMenu : MonoBehaviour
 
     private Player playerScript;
 
+    
+
     void Start()
     {
         playerScript = FindObjectOfType<Player>();
@@ -94,5 +96,6 @@ public class UpgradeMenu : MonoBehaviour
         // Debug.Log(traitLevel[traitTier] + " "+ traitName[traitNum] + " : Unlocked!");
 
     }
+
    
 }

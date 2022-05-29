@@ -2498,6 +2498,8 @@ MonoBehaviour:
   traitTier: 2
   nextTier: {fileID: 6800327874319119160}
   isActiveOnGameStart: 0
+  textfield: {fileID: 0}
+  targetText: {fileID: 5401404655855012038}
 --- !u!1 &6800327874234362754
 GameObject:
   m_ObjectHideFlags: 0
@@ -2652,6 +2654,8 @@ MonoBehaviour:
   traitTier: 3
   nextTier: {fileID: 0}
   isActiveOnGameStart: 0
+  textfield: {fileID: 0}
+  targetText: {fileID: 5401404655855012038}
 --- !u!1 &6800327874247450359
 GameObject:
   m_ObjectHideFlags: 0
@@ -2806,6 +2810,8 @@ MonoBehaviour:
   traitTier: 2
   nextTier: {fileID: 6800327876053052872}
   isActiveOnGameStart: 0
+  textfield: {fileID: 0}
+  targetText: {fileID: 5401404655855012038}
 --- !u!1 &6800327874262880961
 GameObject:
   m_ObjectHideFlags: 0
@@ -2943,6 +2949,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6800327874262880964}
+        m_TargetAssemblyTypeName: UpgradeTierButton, Assembly-CSharp
+        m_MethodName: SetText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6800327874262880964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2960,6 +2978,8 @@ MonoBehaviour:
   traitTier: 1
   nextTier: {fileID: 6800327874247450360}
   isActiveOnGameStart: 0
+  textfield: {fileID: 0}
+  targetText: {fileID: 5401404655855012038}
 --- !u!1 &6800327874319119159
 GameObject:
   m_ObjectHideFlags: 0
@@ -3114,6 +3134,8 @@ MonoBehaviour:
   traitTier: 3
   nextTier: {fileID: 0}
   isActiveOnGameStart: 0
+  textfield: {fileID: 0}
+  targetText: {fileID: 5401404655855012038}
 --- !u!1 &6800327874355340680
 GameObject:
   m_ObjectHideFlags: 0
@@ -3718,6 +3740,8 @@ MonoBehaviour:
   traitTier: 1
   nextTier: {fileID: 6800327874209863764}
   isActiveOnGameStart: 0
+  textfield: {fileID: 0}
+  targetText: {fileID: 5401404655855012038}
 --- !u!1 &6800327874782215473
 GameObject:
   m_ObjectHideFlags: 0
@@ -3872,6 +3896,8 @@ MonoBehaviour:
   traitTier: 2
   nextTier: {fileID: 6800327874234362759}
   isActiveOnGameStart: 0
+  textfield: {fileID: 0}
+  targetText: {fileID: 5401404655855012038}
 --- !u!1 &6800327874963348791
 GameObject:
   m_ObjectHideFlags: 0
@@ -4163,6 +4189,8 @@ MonoBehaviour:
   traitTier: 1
   nextTier: {fileID: 6800327874782215474}
   isActiveOnGameStart: 0
+  textfield: {fileID: 0}
+  targetText: {fileID: 5401404655855012038}
 --- !u!1 &6800327875594054018
 GameObject:
   m_ObjectHideFlags: 0
@@ -5002,6 +5030,8 @@ MonoBehaviour:
   traitTier: 3
   nextTier: {fileID: 0}
   isActiveOnGameStart: 0
+  textfield: {fileID: 0}
+  targetText: {fileID: 5401404655855012038}
 --- !u!1 &6800327876127305692
 GameObject:
   m_ObjectHideFlags: 0
