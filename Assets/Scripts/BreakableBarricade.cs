@@ -51,26 +51,31 @@ public class BreakableBarricade : MonoBehaviour
 
     private void barricadeTier()
     {
+        Vector3 gateScale = gameObject.transform.localScale;
         switch(tagType)
         {
             case "str-tier-0":
                 barricadeHP = 9;
                 thresStrength = 3;          // If damage is lower than thresStrength, then barricade does not lose Hp
+                gameObject.transform.localScale = new Vector3 (0.25f, gameObject.transform.localScale[1],gameObject.transform.localScale[2]);
                 break;
 
             case "str-tier-1":
                 barricadeHP = 17;
                 thresStrength = 7;
+                gameObject.transform.localScale = new Vector3 (0.75f, gameObject.transform.localScale[1],gameObject.transform.localScale[2]);
                 break;
 
             case "str-tier-2":
                 barricadeHP = 24;
                 thresStrength = 11;
+                gameObject.transform.localScale = new Vector3 (1.25f, gameObject.transform.localScale[1],gameObject.transform.localScale[2]);
                 break;
 
             case "str-tier-3":
                 barricadeHP = 30;
                 thresStrength = 15;
+                gameObject.transform.localScale = new Vector3 (2f, gameObject.transform.localScale[1],gameObject.transform.localScale[2]);
                 break;
 
             default:

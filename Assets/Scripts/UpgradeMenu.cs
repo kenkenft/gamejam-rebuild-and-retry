@@ -18,45 +18,36 @@ public class UpgradeMenu : MonoBehaviour
     void Start()
     {
         playerScript = FindObjectOfType<Player>();
-        // availablePoints = GameControl.control.availablePoints;
-        // GameObject upgradeMenuLayout = gameObject.Find("UpgradeMenuLayout");
-        // upgradeMenuLayout.SetActive(false);
     }
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("E Key pressed");
+            // Debug.Log("E Key pressed");
             if(GameIsPaused && GameControl.control.availablePoints <=0)
             {
-                Debug.Log("E Key pressed");
-                Debug.Log("IF check passed");
-                Debug.Log("GameIsPaused: " + GameIsPaused + " - availablePoints: " + GameControl.control.availablePoints);
+                // Debug.Log("E Key pressed");
+                // Debug.Log("IF check passed");
+                // Debug.Log("GameIsPaused: " + GameIsPaused + " - availablePoints: " + GameControl.control.availablePoints);
                 Resume();
             }
         }
         if(Input.GetKeyDown(KeyCode.R))
         {
-            Debug.Log("R Key pressed");
+            // Debug.Log("R Key pressed");
             if(GameIsPaused)
             {
-                Debug.Log("Debug Resume");
+                // Debug.Log("Debug Resume");
                 ResumeDebug();
                 GameIsPaused = false;
             }
             else
             {   
-                Debug.Log("Debug Pause");
+                // Debug.Log("Debug Pause");
                 GameControl.control.availablePoints = 9;
                 Pause();
             }
         }
-            // else
-            // {
-            //     Debug.Log("GameIsPaused: " + GameIsPaused + " - availablePoints: " + GameControl.control.availablePoints);
-            //     Pause();
-            // }
-
     }
 
     public void ResumeDebug()
@@ -64,9 +55,6 @@ public class UpgradeMenu : MonoBehaviour
         UpgradeMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
-        // sceneDoors = FindObjectsOfType<Door>(); 
-        // DoorManager doorManager = FindObjectOfType<DoorManager>();
-        // doorManager.SetSpawnDoor(sceneDoors[0]);
     }
 
     public void Resume()

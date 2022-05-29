@@ -8,36 +8,37 @@ public class Player : MonoBehaviour
     // [SerializeField] int[,] unlockedTraits = new int[3,4] { {1, 0, 0, 0}, {1, 0, 0, 0}, {1, 0, 0, 0}}; 
     public int[] traitLevel;
     public int[,] unlockedTraits;
-    [SerializeField] float playerSpeed = 3f;     // Player's base speed
-    [SerializeField] float tier1SpeedBonus = 0.75f;     // Speed bonus from Tier-1 Speed upgrade
-    [SerializeField] float tier2SpeedBonus = 1.50f;     // Speed bonus from Tier-2 Speed sprint upgrade
-    [SerializeField] float tier3SpeedBonus = 3.00f;     // Speed bonus from Tier-3 Speed dash upgrade
-    [SerializeField] float speedDecayMultiplier = 0.95f;
-    [SerializeField] float playerJump = 8.0f;       // Player's base jump height
-    [SerializeField] float tier1JumpBonus = 0.5f;   // Increase player jump height by 50% percent
-    [SerializeField] float jumpVelDecayHigh = 1.4f;       // Player upward velocity decay multiplier for "high" jumps
-    [SerializeField] float jumpVelDecayLow = 1.7f;        // Player upward velocity decay multiplier for "lowJumpMultiplier" jumps
-    [SerializeField] float jumpHoverReduction = 0.0001f;
+    private float playerSpeed = 3f;     // Player's base speed
+    private float tier1SpeedBonus = 0.75f;     // Speed bonus from Tier-1 Speed upgrade
+    private float tier2SpeedBonus = 1.50f;     // Speed bonus from Tier-2 Speed sprint upgrade
+    private float tier3SpeedBonus = 3.00f;     // Speed bonus from Tier-3 Speed dash upgrade
+    private float speedDecayMultiplier = 0.95f;
+    private float playerJump = 8.0f;       // Player's base jump height
+    private float tier1JumpBonus = 0.5f;   // Increase player jump height by 50% percent
+    private float jumpVelDecayHigh = 1.4f;       // Player upward velocity decay multiplier for "high" jumps
+    private float jumpVelDecayLow = 1.7f;        // Player upward velocity decay multiplier for "lowJumpMultiplier" jumps
+    private float jumpHoverReduction = 0.0001f;
     private float jumpTierFallReduction;
 
     private BoxCollider2D playerCollider;
     private float playerColliderWidth;
     private float playerColliderWidthOffset;
-    float faceDirection;
-    Vector2 directionAttack = Vector2.right;
-    float playerSpeedMax;       // For Tier-0 and Tier-1 speed limit
-    float playerSpeedMaxTier2;       // For Tier-2 speed limit
-    float playerSpeedMaxTier3;       // For Tier-3 speed limit
+    private float faceDirection;
+    private Vector2 directionAttack = Vector2.right;
+    private float playerSpeedMax;       // For Tier-0 and Tier-1 speed limit
+    private float playerSpeedMaxTier2;       // For Tier-2 speed limit
+    private float playerSpeedMaxTier3;       // For Tier-3 speed limit
 
     public float attackRange = 2;
     public int baseDamage = 4;
-    public float chargeTimeThresh = 2f;
+    public float chargeTimeThresh = 1.5f;
     private float chargeTimer = 0f;
     private bool canJumpAgain = false;
     private bool isSprinting = false;
     private bool canDash = true;
     private bool isDashing = false;
     private bool isSprintRecharging = false;
+    private float dashCooldownTime = 1.5f;
 
     private float tapSpeed = 0.5f;
     private float lastTapTime = 0f;     
@@ -53,11 +54,15 @@ public class Player : MonoBehaviour
     private Rigidbody2D rig;
     private DoorManager doorManager;
 
+    private SpriteRenderer playerSprite;
+    private Color playerOriginalColour;
+    private Color playerChargeColour;
+    private bool chargeColourFlicker = false;
+
     void Awake ()
     {
         // Get out components
         rig = GetComponent<Rigidbody2D>();
-        
     }
 
     void Start()
@@ -91,6 +96,10 @@ public class Player : MonoBehaviour
         playerSpeedMaxTier3 = playerSpeed * (1 + tier1SpeedBonus + tier2SpeedBonus + tier3SpeedBonus);
         doorManager = FindObjectOfType<DoorManager>();
         transform.position = doorManager.GetSpawnPosition();
+
+        playerSprite = GetComponent<SpriteRenderer>();
+        playerOriginalColour = playerSprite.color;
+        
     }
 
     void Update()
@@ -104,11 +113,13 @@ public class Player : MonoBehaviour
                 { 
                     isDashing = true;
                     canDash = false;
-                    Debug.Log("Engaging Dash");
-                    Invoke("EndDash", 0.3f);
+                    // Debug.Log("Engaging Dash");
+                    Debug.Log(Color.yellow);
+                    playerSprite.color = Color.yellow;
+                    Invoke("EndDash", 3f);
                 }
                 else
-                    Debug.Log("Dash Not Engaged");
+                    // Debug.Log("Dash Not Engaged");
                 lastTapTime = Time.time;
             }
         
@@ -181,11 +192,13 @@ public class Player : MonoBehaviour
             mask.y = Mathf.Clamp( rig.velocity.y, -20f, 40f);
             rig.velocity = mask;
     }
+    
     void EndDash()
     {
         Debug.Log("Dash End");
         isDashing = false;
-        Invoke("EndDashCooldown", 3f);
+        playerSprite.color = playerOriginalColour;
+        Invoke("EndDashCooldown", dashCooldownTime);
     }
 
     void EndDashCooldown()
@@ -214,20 +227,43 @@ public class Player : MonoBehaviour
                 damage = baseDamage * (unlockedTraits[2,0] + unlockedTraits[2,1] + unlockedTraits[2,2]);
 
                 if(unlockedTraits[2,3] == 1 && Input.GetKey(KeyCode.E))
+                {
                     chargeTimer += Time.deltaTime;
-
+                    float colorValueR = Mathf.Clamp(chargeTimer/chargeTimeThresh, 0f, 1f);
+                    if(colorValueR < 1.0f)
+                    {
+                        float colorValueG = playerOriginalColour[1] * (1 - colorValueR);
+                        float colorValueB = playerOriginalColour[2] * (1 - colorValueR);
+                        playerChargeColour = new Color(colorValueR, colorValueG, colorValueB);
+                    }
+                    else if(chargeColourFlicker)
+                        {
+                            float colorValueG = playerOriginalColour[1] * (1 - colorValueR);
+                            float colorValueB = playerOriginalColour[2] * (1 - colorValueR);
+                            playerChargeColour = new Color(colorValueR, colorValueG, colorValueB);
+                            chargeColourFlicker = !chargeColourFlicker;
+                        }
+                    else
+                        {
+                            playerChargeColour = Color.white;
+                            chargeColourFlicker = !chargeColourFlicker;
+                        }
+                    playerSprite.color = playerChargeColour;
+                }
                 if(Input.GetKeyUp(KeyCode.E) && chargeTimer >= chargeTimeThresh && unlockedTraits[2,3] == 1)
                 {
                     damage *= 4;       // Triple the damage
                     Attack(damage);
                     // Debug.Log("Charge Attack!");
                     chargeTimer = 0f;
+                    playerSprite.color = playerOriginalColour;
                 }
                 else if(Input.GetKeyUp(KeyCode.E) || (Input.GetKeyUp(KeyCode.E) && chargeTimer < chargeTimeThresh && unlockedTraits[2,3] == 1))
                 {
                     Attack(damage);
                     // Debug.Log("Normal Attack");
                     chargeTimer = 0f;
+                    playerSprite.color = playerOriginalColour;
                 }
             }
     }
