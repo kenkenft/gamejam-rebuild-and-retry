@@ -170,7 +170,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -50, y: -170}
+  m_AnchoredPosition: {x: 0, y: -170}
   m_SizeDelta: {x: 1000, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2225453925204456687
@@ -228,14 +228,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34.05
-  m_fontSizeBase: 48
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 0
   m_fontSizeMax: 96
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2498,7 +2498,6 @@ MonoBehaviour:
   traitTier: 2
   nextTier: {fileID: 6800327874319119160}
   isActiveOnGameStart: 0
-  textfield: {fileID: 0}
   targetText: {fileID: 5401404655855012038}
 --- !u!1 &6800327874234362754
 GameObject:
@@ -2654,7 +2653,6 @@ MonoBehaviour:
   traitTier: 3
   nextTier: {fileID: 0}
   isActiveOnGameStart: 0
-  textfield: {fileID: 0}
   targetText: {fileID: 5401404655855012038}
 --- !u!1 &6800327874247450359
 GameObject:
@@ -2810,7 +2808,6 @@ MonoBehaviour:
   traitTier: 2
   nextTier: {fileID: 6800327876053052872}
   isActiveOnGameStart: 0
-  textfield: {fileID: 0}
   targetText: {fileID: 5401404655855012038}
 --- !u!1 &6800327874262880961
 GameObject:
@@ -2978,7 +2975,6 @@ MonoBehaviour:
   traitTier: 1
   nextTier: {fileID: 6800327874247450360}
   isActiveOnGameStart: 0
-  textfield: {fileID: 0}
   targetText: {fileID: 5401404655855012038}
 --- !u!1 &6800327874319119159
 GameObject:
@@ -3134,7 +3130,6 @@ MonoBehaviour:
   traitTier: 3
   nextTier: {fileID: 0}
   isActiveOnGameStart: 0
-  textfield: {fileID: 0}
   targetText: {fileID: 5401404655855012038}
 --- !u!1 &6800327874355340680
 GameObject:
@@ -3740,7 +3735,6 @@ MonoBehaviour:
   traitTier: 1
   nextTier: {fileID: 6800327874209863764}
   isActiveOnGameStart: 0
-  textfield: {fileID: 0}
   targetText: {fileID: 5401404655855012038}
 --- !u!1 &6800327874782215473
 GameObject:
@@ -3896,7 +3890,6 @@ MonoBehaviour:
   traitTier: 2
   nextTier: {fileID: 6800327874234362759}
   isActiveOnGameStart: 0
-  textfield: {fileID: 0}
   targetText: {fileID: 5401404655855012038}
 --- !u!1 &6800327874963348791
 GameObject:
@@ -4189,7 +4182,6 @@ MonoBehaviour:
   traitTier: 1
   nextTier: {fileID: 6800327874782215474}
   isActiveOnGameStart: 0
-  textfield: {fileID: 0}
   targetText: {fileID: 5401404655855012038}
 --- !u!1 &6800327875594054018
 GameObject:
@@ -5030,7 +5022,6 @@ MonoBehaviour:
   traitTier: 3
   nextTier: {fileID: 0}
   isActiveOnGameStart: 0
-  textfield: {fileID: 0}
   targetText: {fileID: 5401404655855012038}
 --- !u!1 &6800327876127305692
 GameObject:

@@ -13,7 +13,7 @@ public class UpgradeTierButton : MonoBehaviour
     [SerializeField] Button nextTier;
     [SerializeField] bool isActiveOnGameStart;
 
-    public Text textfield;
+    // public Text textfield;
     public TextMeshProUGUI targetText;
     
     void Start()
@@ -42,6 +42,13 @@ public class UpgradeTierButton : MonoBehaviour
         if(GameControl.control.availablePoints > 0)
         {
             GameControl.control.availablePoints--;
+            if(GameControl.control.availablePoints > 0)
+                targetText.SetText("Spend all upgrade points to proceed. Remaining points: " + GameControl.control.availablePoints);
+            else
+            {
+                targetText.SetText("Press E to proceed");
+                targetText.alignment = TextAlignmentOptions.Center;
+            }
             UpgradeMenuUI.GetComponent<UpgradeMenu>()?.SetTargetButton(traitNum, traitTier); // Call method in UpgradeMenu class that will call a method in Player class
         
             GetComponent<Button>().interactable = false;  // Disable interactable on current button
@@ -54,11 +61,11 @@ public class UpgradeTierButton : MonoBehaviour
     }
 
     
-    public void SetText()
-    {
-        // Textfield.text = text;
-        // Textfield.text = "Spend all upgrade points to proceed. Remaining points: " + GameControl.control.availablePoints;
-        targetText.SetText("Spend all upgrade points to proceed. Remaining points: " + GameControl.control.availablePoints);
-    }
+    // public void SetText()
+    // {
+    //     // Textfield.text = text;
+    //     // Textfield.text = "Spend all upgrade points to proceed. Remaining points: " + GameControl.control.availablePoints;
+    //     targetText.SetText("Spend all upgrade points to proceed. Remaining points: " + GameControl.control.availablePoints);
+    // }
 
 }
