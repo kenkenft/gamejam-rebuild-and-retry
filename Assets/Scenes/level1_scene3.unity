@@ -4896,7 +4896,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.6502464, y: 1}
+    m_SensorSize: {x: 2.6688597, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -5045,6 +5045,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7907895031004021988, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
+      propertyPath: m_text
+      value: Press E to go to next level
+      objectReference: {fileID: 0}
+    - target: {fileID: 7907895031004021988, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
+      propertyPath: m_fontSize
+      value: 22.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7907895031004021988, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
+      propertyPath: m_margin.w
+      value: 14.558136
+      objectReference: {fileID: 0}
+    - target: {fileID: 7907895031004021988, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
+      propertyPath: m_margin.x
+      value: -60.879395
+      objectReference: {fileID: 0}
+    - target: {fileID: 7907895031004021988, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 7907895031004021991, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -5193,9 +5213,17 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7907895032845198846, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -72
+      objectReference: {fileID: 0}
+    - target: {fileID: 7907895032845198846, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -17
+      objectReference: {fileID: 0}
     - target: {fileID: 7907895032845198847, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_text
-      value: 'Boss: Ah, Johnson. You''re on time for once. Now get to work!'
+      value: You made it to work on time, and you're not worse for wear either!
       objectReference: {fileID: 0}
     - target: {fileID: 7907895032845198847, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_fontSize

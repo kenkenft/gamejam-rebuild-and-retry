@@ -5908,7 +5908,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 703247698, guid: 39ffc198fe329f84d82dffd5cdd107ba, type: 3}
       propertyPath: scene
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3476742491248824912, guid: 39ffc198fe329f84d82dffd5cdd107ba, type: 3}
       propertyPath: m_SortingOrder
@@ -6688,30 +6688,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7907895031004021988, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
-      propertyPath: m_text
-      value: Press E to go to next level
-      objectReference: {fileID: 0}
-    - target: {fileID: 7907895031004021988, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
-      propertyPath: m_fontSize
-      value: 22.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7907895031004021988, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
-      propertyPath: m_margin.w
-      value: 14.558136
-      objectReference: {fileID: 0}
-    - target: {fileID: 7907895031004021988, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
-      propertyPath: m_margin.x
-      value: -60.879395
-      objectReference: {fileID: 0}
-    - target: {fileID: 7907895031004021988, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
-      propertyPath: m_fontSizeMin
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 7907895031004021990, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
-      propertyPath: m_Name
-      value: Press E to go to next level
-      objectReference: {fileID: 0}
     - target: {fileID: 7907895031004021991, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -6822,7 +6798,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7907895031237324307, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: upgradePoints
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7907895031237324307, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: showUpgradeMenu
@@ -6860,34 +6836,13 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7907895032845198846, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7907895032845198846, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7907895032845198846, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -71
-      objectReference: {fileID: 0}
-    - target: {fileID: 7907895032845198846, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 88
-      objectReference: {fileID: 0}
     - target: {fileID: 7907895032845198847, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_text
-      value: Your arrive on time, and the date goes smoothly. It was definitely worth
-        dying for.
+      value: 'Date: Ah, you must be Johnson. Shall we order first?'
       objectReference: {fileID: 0}
     - target: {fileID: 7907895032845198847, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_fontSize
-      value: 28.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7907895032845198847, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
-      propertyPath: m_margin.w
-      value: 41.47155
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 7907895032845198847, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_margin.x
@@ -6899,7 +6854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7907895032845198847, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_margin.z
-      value: -32.97998
+      value: -129.74683
       objectReference: {fileID: 0}
     - target: {fileID: 7907895032845198847, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_fontSizeMax
