@@ -4963,7 +4963,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 703247698, guid: 39ffc198fe329f84d82dffd5cdd107ba, type: 3}
       propertyPath: scene
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3476742491248824912, guid: 39ffc198fe329f84d82dffd5cdd107ba, type: 3}
       propertyPath: m_SortingOrder

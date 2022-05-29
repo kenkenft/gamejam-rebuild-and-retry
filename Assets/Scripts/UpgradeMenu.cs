@@ -19,6 +19,8 @@ public class UpgradeMenu : MonoBehaviour
     {
         playerScript = FindObjectOfType<Player>();
         // availablePoints = GameControl.control.availablePoints;
+        // GameObject upgradeMenuLayout = gameObject.Find("UpgradeMenuLayout");
+        // upgradeMenuLayout.SetActive(false);
     }
     void Update()
     {

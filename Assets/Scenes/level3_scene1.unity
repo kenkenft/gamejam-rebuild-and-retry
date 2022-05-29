@@ -2596,7 +2596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorID: 0
-  scene: 9
+  scene: 8
   doorEntrance: {fileID: 662706704}
   spawnPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1450886004

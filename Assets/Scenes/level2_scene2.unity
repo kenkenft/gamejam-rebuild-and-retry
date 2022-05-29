@@ -4931,7 +4931,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1459116628463561739, guid: 65b4ba3445f27e34895de43f45326985, type: 3}
       propertyPath: scene
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1459116628463561739, guid: 65b4ba3445f27e34895de43f45326985, type: 3}
       propertyPath: doorID

@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/transition_test2.unity
     guid: 9589637d0abdaa14c8a85c3ea36f171d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/transition_test3.unity
     guid: 5a98cbe92f7a72643997cb5b8cecfc53
   - enabled: 1

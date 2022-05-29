@@ -4477,12 +4477,12 @@ GameObject:
   - component: {fileID: 6800327875794886690}
   - component: {fileID: 6800327875794886691}
   m_Layer: 5
-  m_Name: UpgradeMenu
+  m_Name: UpgradeMenuLayout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6800327875794886688
 RectTransform:
   m_ObjectHideFlags: 0
