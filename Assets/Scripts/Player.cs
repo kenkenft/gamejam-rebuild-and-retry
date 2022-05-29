@@ -333,6 +333,8 @@ public class Player : MonoBehaviour
         if(col.gameObject.CompareTag("Door") == true)
         {
             Debug.Log("I've Jumped off the building");
+            Door door = col.gameObject.GetComponent<Door>();
+            doorManager.SetSpawnDoor(door);
         }
     }
 

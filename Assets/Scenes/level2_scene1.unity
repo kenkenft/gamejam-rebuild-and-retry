@@ -2786,7 +2786,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 703247698, guid: 39ffc198fe329f84d82dffd5cdd107ba, type: 3}
       propertyPath: scene
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 703247698, guid: 39ffc198fe329f84d82dffd5cdd107ba, type: 3}
       propertyPath: doorID
