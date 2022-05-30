@@ -8,18 +8,19 @@ public class Enemy : MonoBehaviour
     public Player playerScript;
     public int health;
     private bool isDead;
-    
+    private AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
     {
-            playerScript = FindObjectOfType<Player>();
+        playerScript = FindObjectOfType<Player>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     public void TakeDamage (int damageToTake)
     {
         health -= damageToTake;
-
+        audioManager.Play("enemyHit");
         if(health <= 0)
         {
             GetComponent<BoxCollider2D>().enabled = false;             // Remove collider on death
