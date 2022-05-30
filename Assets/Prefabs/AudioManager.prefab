@@ -85,3 +85,13 @@ MonoBehaviour:
     source: {fileID: 0}
     volume: 0.491
     pitch: 1
+  - name: doorOpen
+    clip: {fileID: 8300000, guid: 070779cdcfbe3ff4688691fb33bc3e4e, type: 3}
+    source: {fileID: 0}
+    volume: 0.491
+    pitch: 1
+  - name: doorClose
+    clip: {fileID: 8300000, guid: 2e071f5b8b8467d45a5e6e24c23c6ad4, type: 3}
+    source: {fileID: 0}
+    volume: 0.21
+    pitch: 0.4

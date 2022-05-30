@@ -14,6 +14,7 @@ TagManager:
   - Enemy
   - Treadmill
   - ScenarioExplanation
+  - Instructions
   layers:
   - Default
   - TransparentFX

@@ -20,7 +20,7 @@ public class UpgradeMenu : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             if(GameIsPaused && GameControl.control.availablePoints <=0)
                 Resume();

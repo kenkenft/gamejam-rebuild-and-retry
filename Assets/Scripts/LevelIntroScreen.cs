@@ -16,7 +16,7 @@ public class LevelIntroScreen : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E) && showUpgradeMenu)
+        if(Input.GetKeyDown(KeyCode.Space) && showUpgradeMenu)
         {
             showUpgradeMenu = false;
             inUpgradeMenu = true;
@@ -24,7 +24,7 @@ public class LevelIntroScreen : MonoBehaviour
             Resume();
             ShowUpgradeMenu();
         }
-        else if(Input.GetKeyDown(KeyCode.E) && !showUpgradeMenu && !inUpgradeMenu)
+        else if(Input.GetKeyDown(KeyCode.Space) && !showUpgradeMenu && !inUpgradeMenu)
         {
             Resume();
         }

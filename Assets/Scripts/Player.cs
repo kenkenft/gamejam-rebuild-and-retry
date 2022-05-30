@@ -60,6 +60,8 @@ public class Player : MonoBehaviour
     private bool chargeColourFlicker = false;
     public AudioManager audioManager;
 
+    private ShowText showText;
+
     void Awake ()
     {
         // Get out components
@@ -111,7 +113,6 @@ public class Player : MonoBehaviour
                 { 
                     isDashing = true;
                     canDash = false;
-                    Debug.Log(Color.yellow);
                     playerSprite.color = Color.yellow;
                     audioManager.Play("playerDashing");
                     Invoke("EndDash", 3f);
@@ -199,7 +200,6 @@ public class Player : MonoBehaviour
     
     void EndDash()
     {
-        Debug.Log("Dash End");
         isDashing = false;
         playerSprite.color = playerOriginalColour;
         Invoke("EndDashCooldown", dashCooldownTime);
@@ -208,7 +208,6 @@ public class Player : MonoBehaviour
     void EndDashCooldown()
     {
         canDash = true;
-        Debug.Log("Can Dash!");
     }
 
     void interactOrAttack()
@@ -370,11 +369,25 @@ public class Player : MonoBehaviour
             Door door = col.gameObject.GetComponent<Door>();
             doorManager.SetSpawnDoor(door);
         }
+        if(col.gameObject.CompareTag("Instructions") == true)
+        {
+            showText = col.gameObject.GetComponent<ShowText>();
+            showText.ShowInstructions();
+        }
     }
 
     void OnTriggerExit2D(Collider2D col)
     {
+        // Debug.Log(col.gameObject.tag);
         isNearInteractable = false;
+
+        // if(col.gameObject.CompareTag("Instructions") == true)
+        // {
+            
+        //     Debug.Log("Leaving Field - Instructions");
+        //     ShowText showText = col.gameObject.GetComponent<ShowText>();
+        //     showText.HideInstructions();
+        // }
     }
     
 }

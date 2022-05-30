@@ -4430,6 +4430,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8286517987198467416, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
+      propertyPath: m_Name
+      value: Press Space to continue
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286517987198467418, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
+      propertyPath: m_text
+      value: Press Space to continue
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286517987198467418, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
+      propertyPath: m_fontSize
+      value: 22.05
+      objectReference: {fileID: 0}
     - target: {fileID: 8286517987955292122, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
       propertyPath: m_text
       value: 'Level 3: Cheating Charon'

@@ -35,9 +35,12 @@ public class TimedGate : MonoBehaviour
             foreach(SpriteRenderer gateSprite in gateSprites)
             {
                 if(gateSprite.CompareTag("Door"))
-                    gateSprite.color = Color.green;
+                    gateSprite.color = Color.clear;
+                if(gateSprite.CompareTag("Switch"))
+                    gateSprite.color = Color.red;
             } 
             // Debug.Log("Door is Open!");
+            audioManager.Play("doorOpen");
             Invoke("CloseTheGate", timeOpen);
         }
     }
@@ -45,6 +48,7 @@ public class TimedGate : MonoBehaviour
     private void CloseTheGate()
     {
         isSwitchPulled = false;
+        audioManager.Play("doorClose");
             foreach(BoxCollider2D gateCollider in gateColliders)
             {
                 gateCollider.enabled = true;       // Let the player pass through
@@ -53,6 +57,8 @@ public class TimedGate : MonoBehaviour
             {
                 if(gateSprite.CompareTag("Door"))
                     gateSprite.color = Color.red;
+                if(gateSprite.CompareTag("Switch"))
+                    gateSprite.color = Color.green;
             } 
     }
 }

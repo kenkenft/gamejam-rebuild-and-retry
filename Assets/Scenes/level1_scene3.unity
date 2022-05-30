@@ -5104,7 +5104,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7907895031004021988, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_text
-      value: Press E to continue
+      value: Press Space to continue
       objectReference: {fileID: 0}
     - target: {fileID: 7907895031004021988, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_fontSize
@@ -5129,6 +5129,10 @@ PrefabInstance:
     - target: {fileID: 7907895031004021988, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_enableAutoSizing
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7907895031004021990, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
+      propertyPath: m_Name
+      value: Press Space to continue
       objectReference: {fileID: 0}
     - target: {fileID: 7907895031004021991, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_AnchorMax.x
