@@ -8,13 +8,14 @@ public class BreakableBarricade : MonoBehaviour
     private int barricadeHP; 
     private int thresStrength;      // Minimum amount of damage required to actually start taking health off barricadeHP  
     public bool strCheck = false;
+    private AudioManager audioManager;
+
     // Start is called before the first frame update
     void Start()
     {
         tagType = gameObject.tag;
         barricadeTier();            // Initialise barricade properties based on tag. Assumes base damage of player is 4.
-        // Debug.Log("barricadeHP: " + barricadeHP);
-        // Debug.Log("thresStrength: " + thresStrength);
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     public void CheckStrongEnough(int damage)
@@ -35,9 +36,11 @@ public class BreakableBarricade : MonoBehaviour
     private void TakeDamage(int damage)
     {
         barricadeHP -= damage;
+        audioManager.Play("doorHit");
         // Destroy barricade when hp drops to or below 0
         if(barricadeHP <= 0)
         {
+            audioManager.Play("doorDestroy");
             Destroy(gameObject);
         }
 

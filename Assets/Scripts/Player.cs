@@ -58,6 +58,7 @@ public class Player : MonoBehaviour
     private Color playerOriginalColour;
     private Color playerChargeColour;
     private bool chargeColourFlicker = false;
+    public AudioManager audioManager;
 
     void Awake ()
     {
@@ -96,7 +97,7 @@ public class Player : MonoBehaviour
 
         playerSprite = GetComponent<SpriteRenderer>();
         playerOriginalColour = playerSprite.color;
-        
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     void Update()
@@ -112,6 +113,7 @@ public class Player : MonoBehaviour
                     canDash = false;
                     Debug.Log(Color.yellow);
                     playerSprite.color = Color.yellow;
+                    audioManager.Play("playerDashing");
                     Invoke("EndDash", 3f);
                 }
                 else
@@ -255,12 +257,14 @@ public class Player : MonoBehaviour
                     Attack(damage);
                     chargeTimer = 0f;
                     playerSprite.color = playerOriginalColour;
+                    audioManager.Play("playerChargeAttack");
                 }
                 else if(Input.GetKeyUp(KeyCode.E) || (Input.GetKeyUp(KeyCode.E) && chargeTimer < chargeTimeThresh && unlockedTraits[2,3] == 1))
                 {
                     Attack(damage);
                     chargeTimer = 0f;
                     playerSprite.color = playerOriginalColour;
+                    audioManager.Play("playerAttack");
                 }
             }
     }
@@ -311,11 +315,13 @@ public class Player : MonoBehaviour
         {
             rig.velocity = Vector2.up * jump;
             canJumpAgain = true; 
+            audioManager.Play("playerJump");
         }
         else if(canJumpAgain && unlockedTraits[0,2] == 1)    // Jump a second time if Tier 2 jump unlocked
         {
             rig.velocity = Vector2.up * jump;
             canJumpAgain = false;
+            audioManager.Play("playerDoubleJump");
         }
 
     }

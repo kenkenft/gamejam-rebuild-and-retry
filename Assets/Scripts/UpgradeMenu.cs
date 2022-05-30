@@ -26,19 +26,19 @@ public class UpgradeMenu : MonoBehaviour
                 Resume();
         }
         // Debug upgrade menu
-        // if(Input.GetKeyDown(KeyCode.R))
-        // {
-        //     if(GameIsPaused)
-        //     {
-        //         ResumeDebug();
-        //         GameIsPaused = false;
-        //     }
-        //     else
-        //     {   
-        //         GameControl.control.availablePoints = 9;
-        //         Pause();
-        //     }
-        // }
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            if(GameIsPaused)
+            {
+                ResumeDebug();
+                GameIsPaused = false;
+            }
+            else
+            {   
+                GameControl.control.availablePoints = 9;
+                Pause();
+            }
+        }
     }
 
     public void ResumeDebug()

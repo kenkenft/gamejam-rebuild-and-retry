@@ -8,7 +8,7 @@ public class TimedGate : MonoBehaviour
     public float timeOpen = 5.0f;
     private SpriteRenderer[] gateSprites;
     private bool isSwitchPulled;
-
+    private AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +16,8 @@ public class TimedGate : MonoBehaviour
         gateColliders = GetComponentsInChildren<BoxCollider2D>();
         gateSprites = GetComponentsInChildren<SpriteRenderer>();
         isSwitchPulled = false;
+        audioManager = FindObjectOfType<AudioManager>();
+
     }
 
     public void OpenTheGate()
@@ -23,6 +25,7 @@ public class TimedGate : MonoBehaviour
         // Prevent switch from being pulled multiple times
         if(!isSwitchPulled)
         {
+            
             // Debug.Log("I'm pulling a switch");
             isSwitchPulled = true;
             foreach(BoxCollider2D gateCollider in gateColliders)
