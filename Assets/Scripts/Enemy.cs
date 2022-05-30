@@ -16,24 +16,13 @@ public class Enemy : MonoBehaviour
             playerScript = FindObjectOfType<Player>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     public void TakeDamage (int damageToTake)
     {
         health -= damageToTake;
-        Debug.Log("Enemy: damaged");
 
         if(health <= 0)
         {
-            // isDead = true;
-            Debug.Log("Enemy: dead");
-            // agent.isStopped = true;
-            // anim.SetTrigger("Die");
             GetComponent<BoxCollider2D>().enabled = false;             // Remove collider on death
-            // GetComponent<Rigidbody2D>().isKinematic = true;             // Remove collider on death
 
             DoorManager doorManager = FindObjectOfType<DoorManager>();
             Door targetDoor = gameObject.GetComponent<Door>();

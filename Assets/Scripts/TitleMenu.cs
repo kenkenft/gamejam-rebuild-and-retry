@@ -8,19 +8,16 @@ public class TitleMenu : MonoBehaviour
     //Needs an EventSystem Component, otherwise these button commands don't work
     public void OnPlayButton ()
     {
-        //Load level 1
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1); //Load level 1
     }
 
     public void OnQuitButton ()
     {
-        //When testing in Unity, it will not actually quit the Unity application itself
-        Application.Quit();
+        Application.Quit(); //When testing in Unity, it will not actually quit the Unity application itself
     }
 
     public void OnReturnButton ()
     {
-        //Returns player to Main menu from End screen
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(0); //Returns player to Main menu from End screen
     }
 }

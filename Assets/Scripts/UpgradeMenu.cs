@@ -8,7 +8,6 @@ public class UpgradeMenu : MonoBehaviour
     public GameObject UpgradeMenuUI;
     public GameObject player;
     private UpgradeTierButton button;
-    // private float availablePoints;
     private Door[] sceneDoors;
 
     private Player playerScript;
@@ -23,31 +22,23 @@ public class UpgradeMenu : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.E))
         {
-            // Debug.Log("E Key pressed");
             if(GameIsPaused && GameControl.control.availablePoints <=0)
-            {
-                // Debug.Log("E Key pressed");
-                // Debug.Log("IF check passed");
-                // Debug.Log("GameIsPaused: " + GameIsPaused + " - availablePoints: " + GameControl.control.availablePoints);
                 Resume();
-            }
         }
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            // Debug.Log("R Key pressed");
-            if(GameIsPaused)
-            {
-                // Debug.Log("Debug Resume");
-                ResumeDebug();
-                GameIsPaused = false;
-            }
-            else
-            {   
-                // Debug.Log("Debug Pause");
-                GameControl.control.availablePoints = 9;
-                Pause();
-            }
-        }
+        // Debug upgrade menu
+        // if(Input.GetKeyDown(KeyCode.R))
+        // {
+        //     if(GameIsPaused)
+        //     {
+        //         ResumeDebug();
+        //         GameIsPaused = false;
+        //     }
+        //     else
+        //     {   
+        //         GameControl.control.availablePoints = 9;
+        //         Pause();
+        //     }
+        // }
     }
 
     public void ResumeDebug()
@@ -77,14 +68,7 @@ public class UpgradeMenu : MonoBehaviour
     // Set UpgradeTierButton that called this function, and then get the button's target tier and target level
     public void SetTargetButton(int traitNum, int traitTier)
     {
-            // Debug.Log("SetTargetButton method: " + traitNum + ", " + traitTier);
             playerScript.setTier(traitNum,traitTier);
-        
-        // Debugging messages
-        // string[] traitName = {"Jump", "Speed", "Strength"};
-        // string[] traitLevel = {"Tier 0", "Tier 1", "Tier 2", "Tier 3"};
-        // Debug.Log(traitLevel[traitTier] + " "+ traitName[traitNum] + " : Unlocked!");
-
     }
 
    

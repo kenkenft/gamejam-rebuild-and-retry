@@ -22,14 +22,6 @@ public class GameControl : MonoBehaviour
             control = this;
         }
         else if (control != this)
-        {
             Destroy(gameObject);
-        }
-    }
-
-    [UnityEditor.MenuItem("Dev Tools/Delete Save")]
-    public static void DeleteSaves()
-    {
-        PlayerPrefs.DeleteAll();
     }
 }

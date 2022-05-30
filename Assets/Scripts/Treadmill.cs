@@ -14,12 +14,6 @@ public class Treadmill : MonoBehaviour
         onTreadmill = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void CheckPlayerXVelocity()
     {
         Debug.Log("Getting player velocity");

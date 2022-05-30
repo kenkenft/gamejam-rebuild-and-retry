@@ -17,26 +17,20 @@ public class DoorManager : MonoBehaviour
     public void SetSpawnDoor(Door door)
     {
         doorToSpawnAt = door.doorID;    // Gets door ID to use in determining which door to spawn player in the next room
-        // PlayerPrefs.SetInt("DoorToSpawnAt", door.doorID);     // Store door ID in PlayerPrefs to carry between scenes
         GameControl.control.doorToSpawnAt = door.doorID;
         SceneManager.LoadScene(door.scene);     // Load target scene i.e. go to next room
     }
 
     public Vector3 GetSpawnPosition()
     {
-        // doorToSpawnAt = PlayerPrefs.GetInt("DoorToSpawnAt");
         doorToSpawnAt = GameControl.control.doorToSpawnAt;
         
         Vector3 spawnPosition = new Vector3();
         foreach( Door door in sceneDoors)
         {
             if(door.doorID == doorToSpawnAt)
-            {
                 spawnPosition = door.spawnPosition;
-            }
         }
-
         return spawnPosition;
-
     }
 }

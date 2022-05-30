@@ -40,10 +40,8 @@ public class Interactable : MonoBehaviour
 
     private void OpenDoor()
     {
-        // Debug.Log("I'm opening a door");
         Door targetDoor = gameObject.GetComponent<Door>();
         doorManager.SetSpawnDoor(targetDoor);   // Call method that saves information into PlayerPrefs and goes to next scene
-
     }
 
     private void PullSwitch()
@@ -55,7 +53,6 @@ public class Interactable : MonoBehaviour
 
     private void GetOnTreadmill()
     {
-        // Debug.Log("I am on a treadmill");
         Treadmill treadmill = gameObject.GetComponent<Treadmill>();
         treadmill.GetOnTreadmill();
     }

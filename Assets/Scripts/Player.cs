@@ -69,7 +69,6 @@ public class Player : MonoBehaviour
     {
         if(GameControl.control.unlockedTraits == null)
         {
-            // Debug.Log("First time Initialise for GameControl variables");
             traitLevel = new int[3] {0, 0, 0}; // Corresponds to [jump, speed, strength]. 0 is base level; 3 is max level
             unlockedTraits = new int[3,4] { {1, 0, 0, 0}, {1, 0, 0, 0}, {1, 0, 0, 0}};
             playerSpeedMax = playerSpeed; 
@@ -80,8 +79,6 @@ public class Player : MonoBehaviour
         }
         else
         {
-            // Debug.Log("GameControl variables don't need initialising");
-            // Debug.Log("Loading traits from GameControl");
             traitLevel = GameControl.control.traitLevel; // Corresponds to [jump, speed, strength]. 0 is base level; 3 is max level
             unlockedTraits = GameControl.control.unlockedTraits;
             playerSpeedMax = GameControl.control.playerSpeedMax;
@@ -113,14 +110,12 @@ public class Player : MonoBehaviour
                 { 
                     isDashing = true;
                     canDash = false;
-                    // Debug.Log("Engaging Dash");
                     Debug.Log(Color.yellow);
                     playerSprite.color = Color.yellow;
                     Invoke("EndDash", 3f);
                 }
                 else
-                    // Debug.Log("Dash Not Engaged");
-                lastTapTime = Time.time;
+                    lastTapTime = Time.time;
             }
         
         if(Input.GetKey(KeyCode.LeftShift) && unlockedTraits[1,2] == 1)
@@ -143,7 +138,6 @@ public class Player : MonoBehaviour
         // Check if player is attacking or interacting something
         if(Input.GetKey(KeyCode.E)|| Input.GetKeyUp(KeyCode.E))
             interactOrAttack();
-        // Debug.DrawRay(transform.position, directionAttack, Color.red);
     }
 
     void Move()
@@ -153,7 +147,7 @@ public class Player : MonoBehaviour
             directionAttack =  Vector2.left;        
         else if(faceDirection > 0f)
             directionAttack =  Vector2.right;
-        // Otherwise, keep facing in the current direction
+        // if exactly 0, keep facing in the current direction
 
         float moveAmount;
         if(faceDirection == 0)
@@ -222,12 +216,9 @@ public class Player : MonoBehaviour
                 // Debug.Log("Attempting to interact");
                 if(objectInteractable.layer == 8 )      // Assumes layer 8 is Interact layer
                 {
-                    // Debug.Log("This is an interactable object");
                     interactableScript = objectInteractable.GetComponent<Interactable>();
                     interactableScript.WhichInteraction();
                 }
-                else
-                    Debug.Log("NOT an interactable object");
             }
         else
             {
@@ -262,14 +253,12 @@ public class Player : MonoBehaviour
                 {
                     damage *= 4;       // Triple the damage
                     Attack(damage);
-                    // Debug.Log("Charge Attack!");
                     chargeTimer = 0f;
                     playerSprite.color = playerOriginalColour;
                 }
                 else if(Input.GetKeyUp(KeyCode.E) || (Input.GetKeyUp(KeyCode.E) && chargeTimer < chargeTimeThresh && unlockedTraits[2,3] == 1))
                 {
                     Attack(damage);
-                    // Debug.Log("Normal Attack");
                     chargeTimer = 0f;
                     playerSprite.color = playerOriginalColour;
                 }
@@ -283,7 +272,6 @@ public class Player : MonoBehaviour
         Collider2D hitsCollider = hits.collider;
         if(hitsCollider !=null)
         {
-            // Debug.Log("Damage: " + damage);
             if(hitsCollider.gameObject.CompareTag("Enemy"))
                 hitsCollider.GetComponent<Enemy>()?.TakeDamage(damage);
             else
@@ -317,9 +305,7 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        // float jump = playerJump + (playerJump * unlockedTraits[0,1] * tier1JumpBonus);    // Calculate jump power. Player jumps higher if Tier 1 jump is unlocked
         float jump = playerJump * (1 + (1 * unlockedTraits[0,1] * tier1JumpBonus));    // Calculate jump power. Player jumps higher if Tier 1 jump is unlocked
-        // Debug.Log("JumpPower: " + jump);
 
         if(IsGrounded())    // Jump whilst on ground
         {
@@ -368,7 +354,6 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        // isNearInteractable = true;
         if(col.gameObject.layer == 8)       // Assumes Layer 8 is "Interact" layer
         {
             isNearInteractable = true;
@@ -376,7 +361,6 @@ public class Player : MonoBehaviour
         }
         if(col.gameObject.CompareTag("Door") == true)
         {
-            Debug.Log("I've Jumped off the building");
             Door door = col.gameObject.GetComponent<Door>();
             doorManager.SetSpawnDoor(door);
         }

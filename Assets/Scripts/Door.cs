@@ -13,7 +13,4 @@ public class Door : MonoBehaviour
     {
         spawnPosition = transform.GetChild(0).position;
     }
-    
-
-
 }

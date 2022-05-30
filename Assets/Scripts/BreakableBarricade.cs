@@ -22,20 +22,14 @@ public class BreakableBarricade : MonoBehaviour
         if(strCheck)
         {
             if(strCheck && damage > thresStrength)
-            {
-            // Debug.Log("You are strong enough");
                 TakeDamage(damage);
-            }
             else
             {
                 // TODO feedback to show no damage taken
             }
         }
         else
-        {
             TakeDamage(damage);
-        }
-        // Debug.Log(barricadeHP);
     }
 
     private void TakeDamage(int damage)

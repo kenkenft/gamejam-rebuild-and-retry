@@ -15,10 +15,6 @@ public class TimedGate : MonoBehaviour
     {
         gateColliders = GetComponentsInChildren<BoxCollider2D>();
         gateSprites = GetComponentsInChildren<SpriteRenderer>();
-        // for (int i; i < gateColliders.Length; i++)
-        // {
-        //     gateSprites[i] = GetComponent<SpriteRenderer>();
-        // }
         isSwitchPulled = false;
     }
 
@@ -41,10 +37,6 @@ public class TimedGate : MonoBehaviour
             // Debug.Log("Door is Open!");
             Invoke("CloseTheGate", timeOpen);
         }
-        else
-        {
-            Debug.Log("Switch is already down");
-        }
     }
 
     private void CloseTheGate()
@@ -59,8 +51,5 @@ public class TimedGate : MonoBehaviour
                 if(gateSprite.CompareTag("Door"))
                     gateSprite.color = Color.red;
             } 
-
-        // gateCollider.enabled = true;       // Collider enabled and stops player passing through
-        // gateSprite.color = Color.red;
     }
 }
