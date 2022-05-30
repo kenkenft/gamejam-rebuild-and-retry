@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     // [SerializeField] int[,] unlockedTraits = new int[3,4] { {1, 0, 0, 0}, {1, 0, 0, 0}, {1, 0, 0, 0}}; 
     public int[] traitLevel;
     public int[,] unlockedTraits;
-    private float playerSpeed = 3f;     // Player's base speed
+    public float playerSpeed = 3f;     // Player's base speed
     private float tier1SpeedBonus = 0.75f;     // Speed bonus from Tier-1 Speed upgrade
     private float tier2SpeedBonus = 1.50f;     // Speed bonus from Tier-2 Speed sprint upgrade
     private float tier3SpeedBonus = 3.00f;     // Speed bonus from Tier-3 Speed dash upgrade

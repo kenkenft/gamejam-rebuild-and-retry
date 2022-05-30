@@ -2001,12 +2001,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8286517988578516033, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
       propertyPath: m_text
-      value: "They say that time slows down when you're near Death. \n\nSo get within
-        punching distance of Death so that you can get to work on time!"
+      value: "You've slept through your alarm and you're about to be late! But you
+        vaguely recall that time seems to slow down when you're near Death. \n\nSo
+        if you're within punching distance of Death, surely that would allow you
+        to get to work on time?"
       objectReference: {fileID: 0}
     - target: {fileID: 8286517988578516033, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
       propertyPath: m_fontSize
-      value: 34.95
+      value: 29.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
