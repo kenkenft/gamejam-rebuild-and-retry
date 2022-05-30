@@ -1238,8 +1238,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 342622047}
-  - component: {fileID: 342622049}
-  - component: {fileID: 342622048}
   m_Layer: 0
   m_Name: DeadlyStuff
   m_TagString: Door
@@ -1264,48 +1262,6 @@ Transform:
   m_Father: {fileID: 709668634}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &342622048
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 342622046}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.06, y: 0.4}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.53, y: 0.59}
-  m_EdgeRadius: 0
---- !u!114 &342622049
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 342622046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c377faa2ce5a704a8567cc9777d6bad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorID: 0
-  scene: 9
-  doorEntrance: {fileID: 114723287}
-  spawnPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &353927325
 GameObject:
   m_ObjectHideFlags: 0
@@ -4963,7 +4919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 703247698, guid: 39ffc198fe329f84d82dffd5cdd107ba, type: 3}
       propertyPath: scene
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3476742491248824912, guid: 39ffc198fe329f84d82dffd5cdd107ba, type: 3}
       propertyPath: m_SortingOrder
@@ -5987,11 +5943,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7907895031004021988, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_text
-      value: Press E to finish
+      value: Press E to return to title screen
       objectReference: {fileID: 0}
     - target: {fileID: 7907895031004021988, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_fontSize
-      value: 27.6
+      value: 22.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 7907895031004021988, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
+      propertyPath: m_margin.x
+      value: -116.56964
+      objectReference: {fileID: 0}
+    - target: {fileID: 7907895031004021990, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
+      propertyPath: m_Name
+      value: Press E to finish
       objectReference: {fileID: 0}
     - target: {fileID: 7907895031004021991, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_AnchorMax.x
@@ -6011,11 +5975,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7907895031004021991, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -129
+      value: -112.67
       objectReference: {fileID: 0}
     - target: {fileID: 7907895031004021991, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 12
+      value: 4.3
       objectReference: {fileID: 0}
     - target: {fileID: 7907895031237324306, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_Pivot.x
@@ -6141,18 +6105,26 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7907895032845198846, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0000019073
+      objectReference: {fileID: 0}
     - target: {fileID: 7907895032845198847, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_text
-      value: Your friend groggily awakens. He rambles about seeing you jump off a
-        building and punching a skeleton. The doctors are baffled by everything.
+      value: 'Your friend groggily awakens. He rambles about seeing you jumping off
+        of a building and punching a skeleton. The doctors are baffled by these turn
+        of events.
+
+
+        For now, he''s alive, and that is what matters.'
       objectReference: {fileID: 0}
     - target: {fileID: 7907895032845198847, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_fontSize
-      value: 35.2
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 7907895032845198847, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_margin.x
-      value: -141.78522
+      value: -210.94385
       objectReference: {fileID: 0}
     - target: {fileID: 7907895032845198847, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_margin.y
@@ -6160,7 +6132,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7907895032845198847, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_margin.z
-      value: -129.74683
+      value: -198.90552
       objectReference: {fileID: 0}
     - target: {fileID: 7907895032845198847, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_fontSizeMax
