@@ -2614,7 +2614,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.6688597, y: 1}
+    m_SensorSize: {x: 2.7525563, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2935,7 +2935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c377faa2ce5a704a8567cc9777d6bad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorID: 0
+  doorID: 3
   scene: 8
   doorEntrance: {fileID: 0}
   spawnPosition: {x: 0, y: 0, z: 0}
@@ -3874,7 +3874,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 703247698, guid: 39ffc198fe329f84d82dffd5cdd107ba, type: 3}
       propertyPath: doorID
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3476742491248824916, guid: 39ffc198fe329f84d82dffd5cdd107ba, type: 3}
       propertyPath: m_Name
@@ -4782,6 +4782,18 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 22.05
       objectReference: {fileID: 0}
+    - target: {fileID: 8286517987955292121, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286517987955292121, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286517987955292121, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 199
+      objectReference: {fileID: 0}
     - target: {fileID: 8286517987955292122, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
       propertyPath: m_text
       value: 'Level 3: Cheating Charon'
@@ -4793,6 +4805,18 @@ PrefabInstance:
     - target: {fileID: 8286517988145877315, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286517988145877325, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6431373
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286517988145877325, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6431373
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286517988145877325, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6431373
       objectReference: {fileID: 0}
     - target: {fileID: 8286517988578516033, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
       propertyPath: m_text

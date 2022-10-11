@@ -2300,7 +2300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec801cf8c9a60544996a307793cd0451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetText: {fileID: 491466890}
+  targetText: {fileID: 1425249690}
 --- !u!61 &1346874586
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3070,7 +3070,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Punch Death until you leave
+  m_text: '"Who are you?"
+
+    Punch Death until you leave'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3097,8 +3099,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3203,7 +3205,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.6688597, y: 1}
+    m_SensorSize: {x: 2.6993866, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3431,13 +3433,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1648378160}
     m_Modifications:
+    - target: {fileID: 640495672397598793, guid: 65b4ba3445f27e34895de43f45326985, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1459116628463561739, guid: 65b4ba3445f27e34895de43f45326985, type: 3}
       propertyPath: scene
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1459116628463561739, guid: 65b4ba3445f27e34895de43f45326985, type: 3}
       propertyPath: doorID
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1961225876483120625, guid: 65b4ba3445f27e34895de43f45326985, type: 3}
       propertyPath: m_RootOrder
@@ -3449,7 +3455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1961225876483120625, guid: 65b4ba3445f27e34895de43f45326985, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.9
+      value: -1.955
       objectReference: {fileID: 0}
     - target: {fileID: 1961225876483120625, guid: 65b4ba3445f27e34895de43f45326985, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3482,6 +3488,14 @@ PrefabInstance:
     - target: {fileID: 1961225876483120625, guid: 65b4ba3445f27e34895de43f45326985, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3102419757536788325, guid: 65b4ba3445f27e34895de43f45326985, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3374123780807967530, guid: 65b4ba3445f27e34895de43f45326985, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4090133744385872910, guid: 65b4ba3445f27e34895de43f45326985, type: 3}
       propertyPath: m_Name

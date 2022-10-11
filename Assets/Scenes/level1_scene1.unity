@@ -2132,7 +2132,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!1 &1923076423
 GameObject:
@@ -2180,7 +2180,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.6688597, y: 1}
+    m_SensorSize: {x: 2.7525563, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2300,6 +2300,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScenarioExplanation
       objectReference: {fileID: 0}
+    - target: {fileID: 8286517986969327523, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8286517986969327532, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2396,6 +2400,18 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 22.05
       objectReference: {fileID: 0}
+    - target: {fileID: 8286517987955292121, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286517987955292121, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286517987955292121, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 199
+      objectReference: {fileID: 0}
     - target: {fileID: 8286517987955292122, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
       propertyPath: m_text
       value: 'Level 1: Tardy termination!'
@@ -2407,6 +2423,18 @@ PrefabInstance:
     - target: {fileID: 8286517988145877315, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286517988145877325, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6415094
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286517988145877325, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6415094
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286517988145877325, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6415094
       objectReference: {fileID: 0}
     - target: {fileID: 8286517988578516033, guid: 83da47f15f6f14a4d86dc530b8e8e008, type: 3}
       propertyPath: m_text

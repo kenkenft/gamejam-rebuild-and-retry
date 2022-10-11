@@ -9,6 +9,7 @@ public class LevelIntroScreen : MonoBehaviour
     public int upgradePoints; 
     public bool showUpgradeMenu;
     public bool inUpgradeMenu;
+    public bool isLastLevel;
     
     void Start()
     {
@@ -24,7 +25,7 @@ public class LevelIntroScreen : MonoBehaviour
             Resume();
             ShowUpgradeMenu();
         }
-        else if(Input.GetKeyDown(KeyCode.Space) && !showUpgradeMenu && !inUpgradeMenu)
+        else if(Input.GetKeyDown(KeyCode.Space) && !showUpgradeMenu && !inUpgradeMenu && !isLastLevel)
         {
             Resume();
         }

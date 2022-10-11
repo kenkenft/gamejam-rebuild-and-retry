@@ -5967,6 +5967,10 @@ PrefabInstance:
       propertyPath: scene
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 703247698, guid: 39ffc198fe329f84d82dffd5cdd107ba, type: 3}
+      propertyPath: doorID
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3476742491248824912, guid: 39ffc198fe329f84d82dffd5cdd107ba, type: 3}
       propertyPath: m_SortingOrder
       value: 0
@@ -6209,7 +6213,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.6688597, y: 1}
+    m_SensorSize: {x: 2.6114519, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -6795,7 +6799,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7907895031004021991, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -14
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 7907895031004021991, guid: 6f988454344f03449bc61d2402f42f03, type: 3}
       propertyPath: m_AnchoredPosition.y

@@ -45,7 +45,7 @@ public class UpgradeTierButton : MonoBehaviour
                 targetText.SetText("Spend all upgrade points to proceed. Remaining points: " + GameControl.control.availablePoints);
             else
             {
-                targetText.SetText("Press E to proceed");
+                targetText.SetText("Press Space to proceed");
                 targetText.alignment = TextAlignmentOptions.Center;
             }
             UpgradeMenuUI.GetComponent<UpgradeMenu>()?.SetTargetButton(traitNum, traitTier); // Call method in UpgradeMenu class that will call a method in Player class

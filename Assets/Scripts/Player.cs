@@ -378,16 +378,7 @@ public class Player : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D col)
     {
-        // Debug.Log(col.gameObject.tag);
         isNearInteractable = false;
-
-        // if(col.gameObject.CompareTag("Instructions") == true)
-        // {
-            
-        //     Debug.Log("Leaving Field - Instructions");
-        //     ShowText showText = col.gameObject.GetComponent<ShowText>();
-        //     showText.HideInstructions();
-        // }
     }
     
 }
